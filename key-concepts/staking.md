@@ -31,8 +31,7 @@ One can currently stake funds for a range of activities, and the table below lis
 | Proposals | Yes | Yes\* |
 | Worker\*\* | Yes | Yes |
 
-_\* It varies across_ [_proposal types_](../governance/proposals.md#proposal-type) _whether punishment is actually used, but in the interest of keeping the staking model simple, it is assumed it always is.
-\*\* Can be both lead an non lead workers in a working group._
+_\* It varies across_ [_proposal types_](../governance/proposals.md#proposal-type) _whether punishment is actually used, but in the interest of keeping the staking model simple, it is assumed it always is. \*\* Can be both lead an non lead workers in a working group._
 
 ## Implementation
 
@@ -48,7 +47,7 @@ Reusability does imply that if there is a slashing event in the context of one o
 
 The table below summarizes the current reusability relationships, changing them currently requires a runtime upgrade.
 
-|  | Staking Candidate |Invitation | Voting | Council Candidate | Councilor | Validation | Nomination | Proposals | Worker\* |
+|  | Staking Candidate | Invitation | Voting | Council Candidate | Councilor | Validation | Nomination | Proposals | Worker\* |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | Staking Candidate | No | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
 | Invitation | - | No | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
@@ -98,10 +97,13 @@ When no longer using up the storage the stake is released or the deposit is paid
 While staking is easier to implement when we are already requiring an stake account, a deposit allows to incentivize other users cleaning up by paying the deposit to them instead of the original person making the deposit.
 
 As it stands now the modules require a deposit to prevent the state bloat are:
+
 * Forum pallet
 * Pallet Discussion
 * Blog
 
 The pallets requiring a stake to prevent state bloat are:
+
 * Working Group
 * Membership
+

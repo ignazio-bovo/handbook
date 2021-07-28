@@ -35,9 +35,9 @@ When voting, one votes simply with an account, and it does not matter what other
 
 If someone voted for a candidate in an election, they will and can free their stake at a later time. Importantly, a vote which was devoted to a losing candidate can be freed the moment the election cycle is over, while a vote which was devoted to a winner can only be freed after the announcing period of the next election begins. The idea behind this asymmetry is to more closely expose the winners to the consequences of their decision.
 
-####  Candidacy
+#### Candidacy
 
-When voting, one does so as a member, and one can only do so a single time per election. One has to stake with an account bound to the membership, and, this account can only be simultaneously locked for 
+When voting, one does so as a member, and one can only do so a single time per election. One has to stake with an account bound to the membership, and, this account can only be simultaneously locked for
 
 1. voting in some past election, using lock id `VOTING_LOCK_ID`.
 2. candidacy in some past election, using lock id `CANDIDACY_LOCK_ID`.
@@ -334,7 +334,7 @@ Any possible vote and corresponding voting lock from a prior election is removed
 * Is signed with some account `staking_account_id` which has vote in the current election cycle.
 * Vote is in **Sealed** stage.
 * `salt`length is not higher than `MAX_SALT_LENGTH`.
-* `candidate_id` __identifies a candidate in the current election.
+* `candidate_id` \_\_identifies a candidate in the current election.
 * The commitment in the vote is verified to correspond to the provided `salt` and `candidate_id`.
 
 #### Effect
@@ -356,7 +356,7 @@ None.
 
 #### Effect
 
-Voting lock is removed from  account and vote is removed.
+Voting lock is removed from account and vote is removed.
 
 ### Recover Failed Candidacy Stake
 
@@ -383,7 +383,7 @@ Candidate lock is removed from staking account of candidate, and candidate is re
 | Name | Description |
 | :--- | :--- |
 | `membership_id` | Membership identifier. |
-| `note` | Encoded [candidacy note](/key-concepts/encodings.md#candidacy-note) metadata (subsequent calls will only affect explicitly provided metadata fields) |
+| `note` | Encoded [candidacy note](../key-concepts/encodings.md#candidacy-note) metadata \(subsequent calls will only affect explicitly provided metadata fields\) |
 
 #### Conditions
 

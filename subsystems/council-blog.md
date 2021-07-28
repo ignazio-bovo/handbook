@@ -1,15 +1,14 @@
 ---
 description: >-
-  A blog where different posts can be published through the proposal system and replyied to by
-  anyone.
+  A blog where different posts can be published through the proposal system and
+  replyied to by anyone.
 ---
 
 # Council Blog
 
 ## Introduction
 
-Using the proposal system blogpost can be made and edited. Members can reply to posts and also to replies making it a nested reply system. Posts can be locked and unlocked through the proposal system, when a post is locked no new replies can be created.
-Also, replies can be either editable or non-editable, editable replies can be edited throughout their lifetime, they require a deposit which is returned when you make it no longer editable through the `delete_reply` extrinsic.
+Using the proposal system blogpost can be made and edited. Members can reply to posts and also to replies making it a nested reply system. Posts can be locked and unlocked through the proposal system, when a post is locked no new replies can be created. Also, replies can be either editable or non-editable, editable replies can be edited throughout their lifetime, they require a deposit which is returned when you make it no longer editable through the `delete_reply` extrinsic.
 
 ## Roles
 
@@ -37,44 +36,21 @@ A post is defined by the following
 A reply is defined by the following
 
 * **Text Hash:** Hash of the text of the reply
-* **Owner:*** Creator of the Reply
+* **Owner:\*** Creator of the Reply
 * **Parent Id:** Id of the parent reply or post
 * **Clean Up Payoff:** Reward for deleting the reply
 * **Last Edited**: Last time the reply was edited
 
 A reply can be deleted by anyone after `ReplyLifetime` passed since the reply was last edited.
 
-
 ## Constants
 
 The following constants are hard coded into the system, they can only be updated with a runtime upgrade.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Description</th>
-      <th style="text-align:center">Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>REPLY_DEPOSIT</code>
-      </td>
-      <td style="text-align:left">Required deposit to create a reply.</td>
-      <td style="text-align:center"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>REPLY_LIFETIME</code>
-      </td>
-      <td style="text-align:left">Number of blocks until a reply<br />
-      can be deleted by anyone</td>
-      <td style="text-align:center"><code>fill-in</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name | Description | Value |
+| :--- | :--- | :--- |
+| `REPLY_DEPOSIT` | Required deposit to create a reply. | `fill-in` |
+| `REPLY_LIFETIME` | Number of blocks until a reply  can be deleted by anyone | `fill-in` |
 
 ## Extrinsics
 
@@ -118,7 +94,7 @@ The following constants are hard coded into the system, they can only be updated
 
 * Signer's account corresponds to participant.
 * Post with `post_id` exists and is unlocked.
-* `reply_id` exists in storage(has been created as editable and has not been erased).
+* `reply_id` exists in storage\(has been created as editable and has not been erased\).
 * `participant` is Reply's owner.
 
 #### Effect
@@ -141,7 +117,7 @@ The following constants are hard coded into the system, they can only be updated
 
 * Signer's account corresponds to participant.
 * Post with `post_id` exists and is unlocked.
-* `reply_id` exists in storage(has been created as editable and has not been erased).
+* `reply_id` exists in storage\(has been created as editable and has not been erased\).
 * `participant` is Reply's owner or `REPLY_LIFETME` has gone by since Reply `last_edited`.
 
 #### Effect

@@ -45,11 +45,11 @@ Therefore these fields aren't saved into the storage, aren't checked, and in the
 
 ### Working Group
 
-The membership subsystem has a working group. The purpose of the group is to effectively distribute invitation quotas and verified status. The lead, called the _membership lead_  has the extra task of refreshing the quotas to workers, which they can in turn then distribute to other members. Workers are referred to as _membership evangelists_.
+The membership subsystem has a working group. The purpose of the group is to effectively distribute invitation quotas and verified status. The lead, called the _membership lead_ has the extra task of refreshing the quotas to workers, which they can in turn then distribute to other members. Workers are referred to as _membership evangelists_.
 
 ### Buying a Membership
 
-The primary means of establishing a membership is buying one by burning tokens, the number of which is held in a mutable parameter denoted as `membership_price`. When purchasing a membership, another member, called a _reference,_ can be referenced, resulting in a portion of the burned funds being credited to the reference. This portion is a mutable parameter denoted as `referral_cut` and defined as the membership fee percentage. Currently, there is a limit of 50% for the referral cut. 
+The primary means of establishing a membership is buying one by burning tokens, the number of which is held in a mutable parameter denoted as `membership_price`. When purchasing a membership, another member, called a _reference,_ can be referenced, resulting in a portion of the burned funds being credited to the reference. This portion is a mutable parameter denoted as `referral_cut` and defined as the membership fee percentage. Currently, there is a limit of 50% for the referral cut.
 
 ### Invitations
 
@@ -83,7 +83,7 @@ The following constants are hard coded into the system, they can only be updated
 | `root_account` | To be root account of membership. |
 | `controller_account` | To be controller account of membership. |
 | `handle` | To be handle of membership. |
-| `metadata` | Encoded [membership metadata](/key-concepts/encodings.md#membership-metadata) |
+| `metadata` | Encoded [membership metadata](../key-concepts/encodings.md#membership-metadata) |
 | `referer_id` | Optional identifier of some existing member. |
 
 #### Conditions
@@ -107,7 +107,7 @@ The following constants are hard coded into the system, they can only be updated
 | `root_account` | To be root account of membership. |
 | `controller_account` | To be controller account of membership. |
 | `handle` | To be handle of membership. |
-| `metadata` | Encoded [membership metadata](/key-concepts/encodings.md#membership-metadata) |
+| `metadata` | Encoded [membership metadata](../key-concepts/encodings.md#membership-metadata) |
 
 #### Conditions
 
@@ -131,7 +131,7 @@ The following constants are hard coded into the system, they can only be updated
 | :--- | :--- |
 | `member_id` | Identifier of member wishing to update profile. |
 | `handle` | Optional new handle for membership. |
-| `new_metadata` | Optional new encoded [membership metadata](/key-concepts/encodings.md#membership-metadata) (only the provided fields will be updated) |
+| `new_metadata` | Optional new encoded [membership metadata](../key-concepts/encodings.md#membership-metadata) \(only the provided fields will be updated\) |
 
 #### Conditions
 

@@ -89,14 +89,15 @@
 ## Working Group Application Metadata
 
 | Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
+| :--- | :--- | :--- | :--- |
 | answers | string | repeated | List of answers to opening application form questions |
 
 ## Council Candidacy Note
 
 | Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
+| :--- | :--- | :--- | :--- |
 | header | string | optional | Candidacy header text |
-| bullet_points | string | repeated | Candidate program in form of bullet points |
-| banner_image_uri | string | optional | Image uri of candidate&#39;s banner |
-| description | string | optional | Candidacy description (md-formatted) |
+| bullet\_points | string | repeated | Candidate program in form of bullet points |
+| banner\_image\_uri | string | optional | Image uri of candidate's banner |
+| description | string | optional | Candidacy description \(md-formatted\) |
+
