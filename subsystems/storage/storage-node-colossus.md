@@ -13,30 +13,48 @@ Storage nodes
 
 ## API
 
-### Status
+### files
 
-{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml" path="undefined" method="undefined" %}
-[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml)
+#### HEAD
+
+{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml" path="undefined" method="undefined" %}
+[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml)
 {% endswagger %}
 
-### Buckets
+#### POST
 
-{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml" path="/buckets" method="get" %}
-[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml)
+{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml" path="/files" method="post" %}
+[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml)
 {% endswagger %}
 
-### Asset
+### authToken
 
-#### Get
-
-{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml" path="/asset/{objectId}" method="get" %}
-[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml)
+{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml" path="/authToken" method="post" %}
+[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml)
 {% endswagger %}
 
-#### Head
+### state/data-objects
 
-{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml" path="/asset/{objectId}" method="head" %}
-[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/distributor-node/src/api-spec/openapi.yml)
+{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml" path="/state/data-objects" method="get" %}
+[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml)
+{% endswagger %}
+
+### state/bags/{bagId}/data-objects
+
+{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml" path="/state/bags/{bagId}/data-objects" method="get" %}
+[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml)
+{% endswagger %}
+
+### version
+
+{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml" path="/version" method="get" %}
+[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml)
+{% endswagger %}
+
+### state/data
+
+{% swagger src="https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml" path="/state/data" method="get" %}
+[https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml](https://raw.githubusercontent.com/Joystream/joystream/giza_staging/storage-node-v2/src/api-spec/openapi.yaml)
 {% endswagger %}
 
 ## Scenarios
