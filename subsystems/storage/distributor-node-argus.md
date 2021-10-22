@@ -8,7 +8,9 @@ x
 
 x
 
-{% swagger src="https://raw.githubusercontent.com/Lezek123/substrate-runtime-joystream/distributor-node/distributor-node/src/api-spec/openapi.yml" path="undefined" method="undefined" %}
+
+
+{% swagger src="https://raw.githubusercontent.com/Lezek123/substrate-runtime-joystream/distributor-node/distributor-node/src/api-spec/openapi.yml" path="/status" method="get" %}
 [https://raw.githubusercontent.com/Lezek123/substrate-runtime-joystream/distributor-node/distributor-node/src/api-spec/openapi.yml](https://raw.githubusercontent.com/Lezek123/substrate-runtime-joystream/distributor-node/distributor-node/src/api-spec/openapi.yml)
 {% endswagger %}
 
