@@ -1,12 +1,17 @@
+---
+description: >-
+  Storage nodes accept user uploads and do long term archiving of user data
+  objects, as well as sharing these objects with bandwidth nodes which do cached
+  low latency last mile on-demand delivery of dat
+---
+
 # Storage Node
 
 ## Introduction
 
-WIP.
+Storage nodes
 
 ## API
-
-WIP.
 
 ### Status
 
