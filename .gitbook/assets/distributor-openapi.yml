@@ -13,11 +13,9 @@ externalDocs:
   url: https://github.com/Joystream/joystream/issues/2224
 servers:
   - url: http://localhost:3334/api/v1/
-
 tags:
   - name: public
     description: Public distributor node API
-
 paths:
   /status:
     get:
@@ -131,7 +129,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         500:
           description: Unexpected server error
-
 components:
   parameters:
     ObjectId:

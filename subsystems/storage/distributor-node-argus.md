@@ -1,4 +1,4 @@
-# Bandwidth Node: Argus
+# Bandwidth Node
 
 ## Introduction
 
@@ -8,8 +8,8 @@ x
 
 x
 
-{% swagger src="../../.gitbook/assets/distributor-openapi.yml" path="undefined" method="undefined" %}
-[distributor-openapi.yml](../../.gitbook/assets/distributor-openapi.yml)
+{% swagger src="https://raw.githubusercontent.com/Lezek123/substrate-runtime-joystream/distributor-node/distributor-node/src/api-spec/openapi.yml" path="undefined" method="undefined" %}
+[https://raw.githubusercontent.com/Lezek123/substrate-runtime-joystream/distributor-node/distributor-node/src/api-spec/openapi.yml](https://raw.githubusercontent.com/Lezek123/substrate-runtime-joystream/distributor-node/distributor-node/src/api-spec/openapi.yml)
 {% endswagger %}
 
 ## Scenarios
