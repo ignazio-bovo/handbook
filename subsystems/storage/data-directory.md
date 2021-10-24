@@ -1,8 +1,8 @@
 ---
 description: >-
   An on-chain index of all data stored and distributed in the system, with
-  associated information about ownership, what providers are tasked with storing
-  and providing bandwidth, as well as utilization
+  associated information about ownership and what providers are tasked with
+  storing and providing bandwidth.
 ---
 
 # Data Directory
