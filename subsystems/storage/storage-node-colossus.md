@@ -1,15 +1,21 @@
 ---
 description: >-
   Storage nodes accept user uploads and do long term archiving of user data
-  objects, as well as sharing these objects with bandwidth nodes which do cached
-  low latency last mile on-demand delivery of dat
+  objects, as well as share these objects with bandwidth nodes which do low
+  latency last mile on-demand delivery.
 ---
 
 # Storage Node
 
+## Preamble
+
+This document is not yet complete and is primarily informed by the following more comprehensive documentation
+
+{% embed url="https://github.com/Joystream/joystream/tree/giza_staging/storage-node-v2" %}
+
 ## Introduction
 
-Storage nodes
+WIP.
 
 ## API
 

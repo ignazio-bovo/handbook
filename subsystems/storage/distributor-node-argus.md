@@ -1,4 +1,17 @@
+---
+description: >-
+  Bandwidth nodes deliver data objects on-demand to end users at low latency by
+  caching data objects and replicating them from storage providers upon cache
+  misses.
+---
+
 # Bandwidth Node
+
+## Preamble
+
+This document is not yet complete and is primarily informed by the following more comprehensive documentation
+
+{% embed url="https://github.com/Joystream/joystream/tree/giza_staging/distributor-node" %}
 
 ## Introduction
 
