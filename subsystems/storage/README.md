@@ -31,7 +31,7 @@ The reason for this is that the network, as represented by its governance appara
 
 A third alternative would have been to rely on other middleware blockchain systems which have been explicitly built for the purpose of providing these services, this includes offerings such as [Arweave](https://www.arweave.org), [Sia+SkyNet](https://siasky.net), [Filecoin](https://filecoin.io), [Storj](https://www.storj.io), [Meson](https://meson.network) and similar systems. Each of these systems have their own idiosynchratic reason for why they may not be an ideal fit, or at least complete fit for the Joystream network. Some our pure storage solutions, other are pure CDN solutions, others are mixtures. Some focus on permanent storage, others on  pay-as-you-go. They all provide different security models. However, uniformly, they all have the following problems
 
-* **Immature:** All of them are still very technically immature, both in tooling, documentation and community of developers using at any sort of serious scale. It is difficult to commit building anything beyond a prototype or proof-of-concept 
+* **Immature:** All of them are still very technically immature, both in tooling, documentation and community of developers using at any sort of serious scale. It is difficult to commit building anything beyond a prototype or proof-of-concept&#x20;
 * **Opaque:** It is notoriously difficult to get a complete and accurate picture of what exact technical and economical guarantees the systems provide, and will provide, in the future. This is largely a consequence of the immaturity, but also that many question are likely unresolved, making it infeasible for the developers to commit to highly specific longer term roadmaps and timeline. The credibility of any actual public commitments are hard to evaluate.
 * **Isolated:** A critical requirement for any efficient platform is that it covers the costs and management on a variety of services on behalf of the users. This applies to the Joystream network as well, which means it must be able to deeply interoperate with any external middleware system, including control funds, issue service provisioning and manage ongoing expenses. This kind of complex interoperability between these systems is not feasible or simple at this time.
 * **Temporary:** When looking at the evolution of other large scale video provisioning platforms, such as YoutTube and Netflix, they invariably start out relying on external infrastructure, but over time they converge to relying on their own internally provisioned infrastructure. This is both because this infrastructure ends up becoming too strategically valuable to risk having to periodically bargain over it, and also because any discrepancy between the ideal cost structure and feature set required by client and their infrastructure ends up becoming prohibitibley costly when magnified by scale.
@@ -48,7 +48,7 @@ There are two working groups involved in storage and bandwidth provisioning, one
 
 ### Storage
 
-* **Storage Lead: **Briefly stated, the lead manages
+* **Storage Lead:** Briefly stated, the lead manages
   * what set of storage providers should store what data.
   * what storage workers can actively participate as storage providers.
   * how different categories of data should be automatically stored once uploaded.
@@ -56,7 +56,7 @@ There are two working groups involved in storage and bandwidth provisioning, one
   * the replication factor on future uploads.
   * the upload blacklist.
   * whether uploads are globally allowed or not at any given time.
-* **Storage Worker/Provider: **
+* **Storage Worker/Provider:**&#x20;
   * Accepts and validates data uploaded from users for storage.
   * Replicates data initially stored with other storage providers.
   * Shares data with other storage providers and bandwidth providers.
@@ -74,7 +74,7 @@ There are two working groups involved in storage and bandwidth provisioning, one
   * what set of bandwidth providers should distribute what data.
   * what bandwidth providers can actively participate as providers.
   * how different categories of data should be automatically distributed.
-  * policy metadata for groups 
+  * policy metadata for groups&#x20;
 * **Bandwidth Worker/Provider:**
   * Sends data to users on demand.
   * Replicates data from storage providers following local caching policy.
@@ -99,7 +99,7 @@ There are two distinct node type, storage nodes and bandwidth nodes, each being 
 Storage nodes are primarily involved in
 
 * accepting uploads from users,
-* downloading data to be stored from other storage nodes, 
+* downloading data to be stored from other storage nodes,&#x20;
 * uploading data to other storage nodes and bandwidth nodes that may require it,
 * dropping data which is deleted from the network,
 
@@ -137,7 +137,7 @@ The key architectural properties of the system is as follows
 
 This can all be succinctly summarize in the following figure.
 
-![Network Architecture](<../../.gitbook/assets/storage_v2 (3).png>)
+![Network Architecture](<../../.gitbook/assets/storage\_v2 (3).png>)
 
 ## Scenarios
 

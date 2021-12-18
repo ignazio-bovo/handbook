@@ -45,7 +45,7 @@ Notice that curator groups, curators or the content directory lead cannot direct
 
 An _Auction Type_ refers to one among the two distinct varieties of auctions which can be used to reallocate ownership of an NFT, hence it is either
 
-* **English:** An _English Auction_ is an auction where the highest bid, above some possibly set _reservation price_, is maintained and updated over time until some block in the future, called the _finalization block. _Lastly there is an associated notion of an _extension period_, which is a period before the finalization bloc, where submitting any bid below the possible _buy now_ price will result in pushing the finalization block forward by the extension period. This is to avoid sniping.
+* **English:** An _English Auction_ is an auction where the highest bid, above some possibly set _reservation price_, is maintained and updated over time until some block in the future, called the _finalization block._ Lastly there is an associated notion of an _extension period_, which is a period before the finalization bloc, where submitting any bid below the possible _buy now_ price will result in pushing the finalization block forward by the extension period. This is to avoid sniping.
 * **Open:** An _Open Auction_ is an auction which operates the same way as an English auction, except that there is no predefined duration, hence no finalization block. For this reason there is a _bid locking duration_, which is the number of blocks which must pass from the time a bid is submitted until the bidder can withdraw the bid if it is not accepted by the current owner.
 
 In both kinds of auctions, there is the concept of a _buy now_ price, which if set, means that if any bid matches this amount at any time, the auction is automatically concluded in favor of this bid.
@@ -57,7 +57,7 @@ A _bid_ represents a binding financial commitment from a member to aquire owners
 * **Bidder:** The identifier of the member who is making the bid.
 * **Account:** The identifier for the account which holds the committed funds, which will be encumbered by a reservation for as long as the bid exists.
 * **Amount:** The balance of funds committed in the bid.
-* **MadeAtBlock:** The block number in which the bid was created. 
+* **MadeAtBlock:** The block number in which the bid was created.&#x20;
 
 Notice that only members can be bidders, no other kind of actor.
 
@@ -102,7 +102,7 @@ The stages and transitions are summarized in the image below.
 An _NFT_ represents ownership title over video, and it is defined by the following information
 
 * **Owner:** The [#nft-owner](video-nfts.md#nft-owner "mention")representing the current owner.
-* **Status: The **[#transactional-status](video-nfts.md#transactional-status "mention") representing the state of the NFT currently.
+* **Status: The** [#transactional-status](video-nfts.md#transactional-status "mention") representing the state of the NFT currently.
 * **Royalty:** If set, it specifies the fraction of the paid value of later transactions which must accrue to the issuer.
 
 ## Parameters
@@ -333,6 +333,27 @@ The following constants are hard coded into the system, they can only be updated
 | `owner_id`  | `ContentActor` who owns the NFT.                                   |
 | `video_id`  | The video corresponding to the NFT for which offer is to be made.  |
 | `metadata`  | User provided metadata associated with the purchase and ownership. |
+
+#### Conditions
+
+* WIP.
+
+#### Effect
+
+* WIP
+
+### Sling Back
+
+**Description**
+
+Returns ownership of idle status NFT from owner to channel itself, even if the channel is owned by the same member who possibly is the owner.
+
+**Parameters**
+
+| Name        | Description                                                            |
+| ----------- | ---------------------------------------------------------------------- |
+| `video_id`  | The video corresponding to the NFT for which sling back is to be done. |
+| `owner_id`  | `ContentActor` who owns the NFT.                                       |
 
 #### Conditions
 

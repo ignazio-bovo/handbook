@@ -28,14 +28,14 @@ Notice that when the council is an actor, it means that if the lifetime of a bou
 
 ### Bounty Actor
 
-For the act of creating, or contributing funds to a bounty, they can be done by either a member or the council as a whole, the concept of a _bounty actor _ refers therefore to either a specific member or the council, and represents this actor in a unified way.
+For the act of creating, or contributing funds to a bounty, they can be done by either a member or the council as a whole, the concept of a _bounty actor_ refers therefore to either a specific member or the council, and represents this actor in a unified way.
 
 ### Funding Period Type
 
 The funding period type refers to how funds are collected for the benefit of a bounty, and there are fundamentally two types:
 
 * **Perpetual:** The funding has not preset termination date, and new contributors can join on an ongoing basis. There is however a _target_ which sets the upper bound for how much can be contributed.
-* **Limited: **The funding lasts for no longer than a given number of blocks, called the _funding period_ . There is a lower bound and upper bound for how much must be contributed
+* **Limited:** The funding lasts for no longer than a given number of blocks, called the _funding period_ . There is a lower bound and upper bound for how much must be contributed
 
 ### Bounty Type
 
@@ -45,7 +45,7 @@ There are two types of bounties in terms of who can participate as worker. There
 
 For someone to be able to participate as a worker, with the opportunity to capture some portion of the funds accumulated for the bounty, they have to announce their participation in the bounty in the form of a _work entry_. It describes the status of the involvement of a worker in a bounty, and it is defined by the following information:
 
-* **EntryId: **Unique non-negative integer identifier across all entries.
+* **EntryId:** Unique non-negative integer identifier across all entries.
 * **Worker:** Member Id of worker.
 * **Staking Account:** Account holding funds used to stake for participation in bounty.
 * **Work:** List of work submissions made during the `Working Period`, encoded as structure data in a standardized format.
@@ -61,13 +61,13 @@ For someone to be able to participate as a worker, with the opportunity to captu
 
 A bounty is defined is defined by the following information
 
-* **BountyId: **Unique non-negative integer identifier across all bounties.
+* **BountyId:** Unique non-negative integer identifier across all bounties.
 * **Oracle:** Bounty oracle, is either a member or the council.
 * **Type:** Bounty type, is open or closed.
 * **Creator:** Bounty creator, is a bounty actor.
 * **Cherry:** Amount of funds contributed by creator as cherry.
 * **Work Period Length:** The number of blocks which must pass, from the end of the funding stage, before the oracle for the bounty can adjudicate the outcome of the bounty.
-* **Judging Period Length: **The maximum number of blocks which can pass, from the end of the working period, while the oracle does not adjudicate a the outcome and funds cannot be withdrawn.
+* **Judging Period Length:** The maximum number of blocks which can pass, from the end of the working period, while the oracle does not adjudicate a the outcome and funds cannot be withdrawn.
 * **Contributions:** The set of all contributions made, each identified with a unique bounty actor, and having an associated positive balance contribution.
 * **Entries:** The set of all active entries in the bounty.
 * **Metadata:** Structured data encoding the purpose and terms of the bounty.
@@ -81,13 +81,13 @@ Below is a list of the stages a bounty can be in, and what each of them mean:
 * **Expired Funding Period:** During this stage the bounty is only waiting to get cancelled by the creator, terminating the bounty.
 * **Working Period:** This is the stage where workers announce their entries and submit their work, and optionally also withdraw. After the working period length has expired since the initiation of the working period, the stage transitions to the `Judgement Period`.
 * **Judgement Period:** This is the stage during which the oracle can evaluate the submitted work entries during the working periods. The judgement identifies a set of winning contributors, possibly empty, each with a non-zero number of tokens as a reward. The total reward must perfectly consume the contributed funding to the bounty, but reward distribution need not be uniform. If the oracle selects an empty set of winners, or does not provide a judgement within the end of the judgement period, a transition is made to the `Bounty Failed` stage, otherwise a transition to `Bounty Successful` stage is made if the set is non-empty.
-* **Withdrawal Period:**  This represents the stage where funds can be withdrawn from the bounty, eventually leading to the bounty getting terminated. 
+* **Withdrawal Period:**  This represents the stage where funds can be withdrawn from the bounty, eventually leading to the bounty getting terminated.&#x20;
   * **Bounty Successful:** This represents the case where the some subset of workers have been selected as winners, and each must cash out to claim their reward. Workers who did not win also have to cash out their possible prior stake. When the last cashout is made, the bounty is terminated.
   * **Bounty Failed:** This represents the case where no winners were selected, and all contributed funds need to be returned to fund contributors, including a portion of a possible cherry. Workers who did not win also have to cash out their possible prior stake.
 
 The stages and transitions are summarized in the image below.
 
-![Bounty life-cycle stages.](../.gitbook/assets/bounties_statechart.png)
+![Bounty life-cycle stages.](../.gitbook/assets/bounties\_statechart.png)
 
 ## Constants
 
@@ -153,7 +153,7 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 
 * `origin` corresponds to `creator`.
 * `bounty_id` corresponds to an existing bounty `bounty`.
-* `creator`created bounty identified by `bounty_id`. 
+* `creator`created bounty identified by `bounty_id`.&#x20;
 * `bounty` is either in stage `Funding Period` without any contributions, or is in stage `Funding Expired`.
 
 #### Effect
@@ -183,7 +183,7 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 #### Effect
 
 * `amount` would bring the total amount funded so far, denoted by `current_funding`, equal to or over the target or max value, denoted by `limit`, and transition to the `Working Period` . Let `_amount` denote the quantity of funds that can be contributed to the bounty without overflowing the limit, that is `min(limit - current_funding, amount)` .
-* `_amount` is debited from `funder` and credited towards account** **`ModuleAccountId`.
+* `_amount` is debited from `funder` and credited towards account **** `ModuleAccountId`.
 * If `funder` has already contributed to the bounty, then add `_amount` to their net contribution, otherwise note their total contribution to be `_amount`.
 
 ### Withdraw Funding
@@ -251,7 +251,7 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 * `origin` corresponds to identifier `member_id` for a member.
 * `bounty_id` corresponds to an existing bounty `bounty`.
 * `bounty` is in stage `Working Period`.
-* `entry_id` corresponds to an entry `entry` with status `Working`  and where the worker has identifier 
+* `entry_id` corresponds to an entry `entry` with status `Working`  and where the worker has identifier&#x20;
 
 #### Effect
 
@@ -275,7 +275,7 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 * `origin` corresponds to identifier `member_id` for a member.
 * `bounty_id` corresponds to an existing bounty `bounty`.
 * `bounty` is in stage `Working Period`.
-* `entry_id` corresponds to an entry `entry` with status `Working`  and where the worker has identifier 
+* `entry_id` corresponds to an entry `entry` with status `Working`  and where the worker has identifier&#x20;
 
 #### Effect
 
@@ -322,8 +322,8 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 
 * `origin` corresponds to identifier `member_id` for a member.
 * `bounty_id` corresponds to an existing bounty `bounty`.
-* `entry_id` corresponds to an entry `entry` where worker has identifier `member_id` and the status is not `CashedOut`or `Rejected `or `Withdrawn` .
-* `bounty` is in stage`Withdrawal Period`. 
+* `entry_id` corresponds to an entry `entry` where worker has identifier `member_id` and the status is not `CashedOut`or `Rejected` or `Withdrawn` .
+* `bounty` is in stage`Withdrawal Period`.&#x20;
 
 #### Effect
 
