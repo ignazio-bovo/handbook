@@ -286,7 +286,7 @@ The following constants are hard coded into the system, they can only be updated
 
 * WIP.
 
-### Complete NFT Auction
+### Claim Won English Auction
 
 **Parameters**
 
@@ -324,7 +324,7 @@ The following constants are hard coded into the system, they can only be updated
 
 * WIP.
 
-### Settle Open Auction
+### Pick Open Auction Winner
 
 **Parameters**
 
