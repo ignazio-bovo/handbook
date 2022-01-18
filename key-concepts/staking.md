@@ -10,9 +10,9 @@ description: >-
 
 Staking, or bonding, is the act of locking up funds under some terms so that they are not transferable and otherwise not entirely usable as they otherwise would be. The terms, referred to as _unstaking terms_ describe the circumstances under which the funds may begin to cease being staked. This may involve who is able to initiate this, at what time and whether there is a possible delay from initiation to completion. This time lag is referred to as the _unstaking period._ Another critical term will also be whether and some part, possibly all of, the funds may be burned. This is referred to as _slashing._
 
-## **Modes**
+## **Purpose**
 
-Staking is used in two modes to serve the system as a whole by attempting to providing more robust incentives for socially optimal conduct in some role that impacts the overall success of the system.
+Staking is used for two purposes to serve the system as a whole by providing more robust incentives for socially optimal conduct in some role that impacts the overall success of the system.
 
 1. **Exposure:** By requiring that someone who occupies a role that impacts the value of the system has exposure to that value in their portfolio. For this requirement to be effective, this exposure should not be hedgeable, and it is generally assumed that markets for this are missing. It is also assumed that any harm or benefit that results from the actions of the actor will capitalize in the value of the platform, and thus be partially reflected in the value of the stake. This should in total discourage harmful conduct and encourage beneficial conduct.
 2. **Punishment:** In cases where it is possible to, if only imperfectly, have the system adjudicate whether an actor has acted harmfully, the ability to slash funds as a result of such detection can generate very strong incentives for pro-social behavior. The adjudication may be purely cryptographic, or it may require some level of social consensus. In either case, to the extent that it reliably can detect failure - that is avoiding false positives and negatives, it is a very cost-effective means of generating incentives compared to the first approach. It's cheaper because it allows for less capital to be locked for a given level of deterrence effect.
@@ -28,49 +28,33 @@ When initiating staking of some kind, it is very often - although not always, in
 1. You occupy the role you claim, by virtue of controlling the role account.
 2. You control the funds living on the staking account in question.
 
-Both are achieved by signing with for some account and in general they will not be the same. As a result, it is required that a user connects - or _binds_, a given account which holds funds for the purposes of staking, to their membership, in advance of being able to use that account for staking as that member.
+Both are achieved by signing with for some account and in general they will not be the same. As a result, it is required that a user connects - or _binds_, a given account which holds funds for the purposes of staking, to their membership, in advance of being able to use that account for staking as that member. This binding is a two step process, per account, where the first step is to turn the account into a _staking candidate_ by issuing a request to bind to a given member by signing via this account, and the second step is for the member to accept this candidate, using the controller account for that membership.
 
 ## Lock Overview
 
 In what follows we attempt to briefly summarizes the what locks exist for what purposes, and on what accounts they are applied.
 
-| Purpose                       |   Description  | Requires Binding | ID | Punishment | Exposure |
-| ----------------------------- | :------------: | :--------------: | -- | ---------- | -------- |
-| Voting                        |                |        No        | 0  |            |          |
-| Council Candidate             |                |        Yes       | 1  |            |          |
-| Councilor                     |                |        Yes       | 2  |            |          |
-| Validation                    |                |        No        | 3  |            |          |
-| Nomination                    |                |        No        | 4  |            |          |
-| Proposals                     |                |        Yes       | 5  |            |          |
-| Storage Worker/Lead           |                |        Yes       | 6  |            |          |
-| Distributor Worker/Lead       |                |                  |    |            |          |
-| Content Directory Worker/Lead |                |        Yes       | 7  |            |          |
-| Forum Worker/Lead             |                |        Yes       | 8  |            |          |
-| Membership Worker/Lead        |                |        Yes       | 9  |            |          |
-| Builders Worker/Lead          |                |        Yes       |    |            |          |
-| HR Worker/Lead                |                |        Yes       |    |            |          |
-| Marketing Worker/Lead         |                |        Yes       |    |            |          |
-| Invitation                    |                |        \*        | 10 |            |          |
-| Staking Candidate             | what is this?? |        Yes       | 11 |            |          |
-| Bounties                      |                |        Yes       | ?  |            |          |
+| Purpose                       | Binding |  ID |
+| ----------------------------- | :-----: | :-: |
+| Voting                        |    No   |  0  |
+| Council Candidate             |   Yes   |  1  |
+| Councilor                     |   Yes   |  2  |
+| Validation                    |    No   |  3  |
+| Nomination                    |    No   |  4  |
+| Proposals                     |   Yes   |  5  |
+| Storage Worker/Lead           |   Yes   |  6  |
+| Distributor Worker/Lead       |   Yes   |     |
+| Content Directory Worker/Lead |   Yes   |  7  |
+| Forum Worker/Lead             |   Yes   |  8  |
+| Membership Worker/Lead        |   Yes   |  9  |
+| Builders Worker/Lead          |   Yes   |     |
+| HR Worker/Lead                |   Yes   |     |
+| Marketing Worker/Lead         |   Yes   |     |
+| Invitation                    |    \*   |  10 |
+| Staking Candidate             |   Yes   |  11 |
+| Bounty Entry                  |   Yes   |  ?  |
 
 \* It is not possible to initiation the invitation lock, it is automatically applied when a new member is invited on, hence the question of whether binding is required for applying the lock does not even apply.
-
-
-
-| Activity          | Exposure | Punishment |
-| ----------------- | :------: | :--------: |
-| Voting            |    Yes   |     No     |
-| Staking Candidate |    Yes   |     No     |
-| Council           |    Yes   |     No     |
-| Validation        |    Yes   |     Yes    |
-| Nomination        |    Yes   |     Yes    |
-| Proposals         |    Yes   |    Yes\*   |
-| Worker\*\*        |    Yes   |     Yes    |
-
-\
-\
-_\* It varies across_ [_proposal types_](../governance/proposals.md#proposal-type) _whether punishment is actually used, but in the interest of keeping the staking model simple, it is assumed it always is. \*\* Can be both lead an non lead workers in a working group._
 
 ## Reuse
 
@@ -82,17 +66,17 @@ Reusability does imply that if there is a slashing event in the context of one o
 
 The table below summarizes the current reusability relationships, changing them currently requires a runtime upgrade.
 
-|                   | Staking Candidate | Invitation | Voting | Council Candidate | Councilor | Validation | Nomination | Proposals | Worker\* |
-| ----------------- | :---------------: | :--------: | :----: | :---------------: | :-------: | :--------: | :--------: | :-------: | :------: |
-| Staking Candidate |         No        |     Yes    |   Yes  |        Yes        |    Yes    |     Yes    |     Yes    |    Yes    |    Yes   |
-| Invitation        |         -         |     No     |   Yes  |        Yes        |    Yes    |     Yes    |     Yes    |    Yes    |    Yes   |
-| Voting            |         -         |      -     |   No   |        Yes        |    Yes    |     Yes    |     Yes    |    Yes    |    Yes   |
-| Council Candidate |         -         |      -     |    -   |         No        |    Yes    |     No     |     No     |     No    |    No    |
-| Councilor         |         -         |      -     |    -   |         -         |     No    |     No     |     No     |     No    |    No    |
-| Validation        |         -         |      -     |    -   |         -         |     -     |     No     |     No     |     No    |    No    |
-| Nomination        |         -         |      -     |    -   |         -         |     -     |      -     |     No     |     No    |    No    |
-| Proposals         |         -         |      -     |    -   |         -         |     -     |      -     |      -     |     No    |    No    |
-| Worker\*          |         -         |      -     |    -   |         -         |     -     |      -     |      -     |     -     |    No    |
+| Staking Candidate |  No | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
+| ----------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | --- |
+| Invitation        |  -  |  No | Yes | Yes | Yes | Yes | Yes | Yes | Yes |     |
+| Voting            |  -  |  -  |  No | Yes | Yes | Yes | Yes | Yes | Yes |     |
+| Council Candidate |  -  |  -  |  -  |  No | Yes |  No |  No |  No |  No |     |
+| Councilor         |  -  |  -  |  -  |  -  |  No |  No |  No |  No |  No |     |
+| Validation        |  -  |  -  |  -  |  -  |  -  |  No |  No |  No |  No |     |
+| Nomination        |  -  |  -  |  -  |  -  |  -  |  -  |  No |  No |  No |     |
+| Proposals         |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  No |  No |     |
+| Worker\*          |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  No |     |
+| Bounty Entry      |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  No |     |
 
 The table is symmetric, as all reuse relationships are symmetric, hence cells are omitted beyond the diagonal to ignore duplicate specification.
 
@@ -108,7 +92,7 @@ Slashing is the act of reducing the balance of an account by some amount, and al
 
 ## State bloat
 
-Some modules such as forum and working group allows user to call extrinsics that allows them to occupy storage. This can be a problem since some malicious users could use this to fill up the storage, either taking all the alloted space for that given storage map or unboundedly claim storage space until no single node has enough storage. Furthermore, there is no incentive even for regular users to cleanup their storage use.
+Some modules such as forum and working group allows user to call extrinsics that allows them to occupy storage. This can be a problem since some malicious users could use this to fill up the storage, either taking all the allotted space for that given storage map or claim storage space until no single node has enough storage. Furthermore, there is no incentive even for regular users to cleanup their storage use.
 
 That's why when a user can use up storage on top of the transaction fee we require either a deposit or additional stake.
 
