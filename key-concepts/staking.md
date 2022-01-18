@@ -60,32 +60,6 @@ Reusability does imply that if there is a slashing event in the context of one o
 
 \* It is not possible to initiation the invitation lock, it is automatically applied when a new member is invited on, hence the question of whether binding is required for applying the lock does not even apply.
 
-## Reuse
-
-Given staking purposes A and B, we can say that stake is reusable across A and B if a token staked towards one can simultaneously count as staked towards the other. Since staking is implemented with locks, and locks do not stack, this means that a single account cannot be used for staking across two non-reusable purposes.
-
-`<figure?>`
-
-Reusability does imply that if there is a slashing event in the context of one of the two, stake in both has been reduced. This must be accounted for by platform actors, and for this reason it is currently not possible to reuse stake across two activities where both are subject to slashing. In fact, the only reuse allowed currently is when exactly one of A or B is voting. This is primarily to counteract the fact that voting is not incentivized, hence lowering the cost to vote is critical.
-
-The table below summarizes the current reusability relationships, changing them currently requires a runtime upgrade.
-
-| Staking Candidate |  No | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes | Yes |
-| ----------------- | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | --- |
-| Invitation        |  -  |  No | Yes | Yes | Yes | Yes | Yes | Yes | Yes |     |
-| Voting            |  -  |  -  |  No | Yes | Yes | Yes | Yes | Yes | Yes |     |
-| Council Candidate |  -  |  -  |  -  |  No | Yes |  No |  No |  No |  No |     |
-| Councilor         |  -  |  -  |  -  |  -  |  No |  No |  No |  No |  No |     |
-| Validation        |  -  |  -  |  -  |  -  |  -  |  No |  No |  No |  No |     |
-| Nomination        |  -  |  -  |  -  |  -  |  -  |  -  |  No |  No |  No |     |
-| Proposals         |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  No |  No |     |
-| Worker\*          |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  No |     |
-| Bounty Entry      |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  -  |  No |     |
-
-The table is symmetric, as all reuse relationships are symmetric, hence cells are omitted beyond the diagonal to ignore duplicate specification.
-
-_\*Any working group, and whether lead or normal worker._
-
 ## Reservation
 
 WIP.
