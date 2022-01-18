@@ -17,9 +17,46 @@ Staking is used in two modes to serve the system as a whole by attempting to pro
 1. **Exposure:** By requiring that someone who occupies a role that impacts the value of the system has exposure to that value in their portfolio. For this requirement to be effective, this exposure should not be hedgeable, and it is generally assumed that markets for this are missing. It is also assumed that any harm or benefit that results from the actions of the actor will capitalize in the value of the platform, and thus be partially reflected in the value of the stake. This should in total discourage harmful conduct and encourage beneficial conduct.
 2. **Punishment:** In cases where it is possible to, if only imperfectly, have the system adjudicate whether an actor has acted harmfully, the ability to slash funds as a result of such detection can generate very strong incentives for pro-social behavior. The adjudication may be purely cryptographic, or it may require some level of social consensus. In either case, to the extent that it reliably can detect failure - that is avoiding false positives and negatives, it is a very cost-effective means of generating incentives compared to the first approach. It's cheaper because it allows for less capital to be locked for a given level of deterrence effect.
 
-## Activities
+## Account Locks
 
-One can currently stake funds for a range of activities, and the table below lists them, along with
+The way staking is implemented is with the use of account [locks](staking.md). Each purpose above has one or more fixed number of locks associated with it, each with its own fixed ID. This means it is very easy to simply look at an account and understand in what staking activity it is involved. Some purposes allow more than one account to hold stake for the given purpose, others do not. Some purposes allow for staking any account, while others require that you are staking with an account that has been bound to a specific membership. The this binding constraint comes from purposes where staking itself is associated with membership, and this binding allows initiation of staking with a single extrinsic signed with membership credentials, rather than having an additional extrinsic for each arbitrary account used for staking on each occasion.
+
+## Account Binding
+
+When initiating staking of some kind, it is very often - although not always, in the context of inhabiting some other kind of role, like being a member. This means that the initiating the staking effectively requires proving two things at the same time
+
+1. You occupy the role you claim, by virtue of controlling the role account.
+2. You control the funds living on the staking account in question.
+
+Both are achieved by signing with for some account and in general they will not be the same. As a result, it is required that a user connects - or _binds_, a given account which holds funds for the purposes of staking, to their membership, in advance of being able to use that account for staking as that member.
+
+## Lock Overview
+
+In what follows we attempt to briefly summarizes the what locks exist for what purposes, and on what accounts they are applied.
+
+| Purpose                       |   Description  | Requires Binding | ID | Punishment | Exposure |
+| ----------------------------- | :------------: | :--------------: | -- | ---------- | -------- |
+| Voting                        |                |        No        | 0  |            |          |
+| Council Candidate             |                |        Yes       | 1  |            |          |
+| Councilor                     |                |        Yes       | 2  |            |          |
+| Validation                    |                |        No        | 3  |            |          |
+| Nomination                    |                |        No        | 4  |            |          |
+| Proposals                     |                |        Yes       | 5  |            |          |
+| Storage Worker/Lead           |                |        Yes       | 6  |            |          |
+| Distributor Worker/Lead       |                |                  |    |            |          |
+| Content Directory Worker/Lead |                |        Yes       | 7  |            |          |
+| Forum Worker/Lead             |                |        Yes       | 8  |            |          |
+| Membership Worker/Lead        |                |        Yes       | 9  |            |          |
+| Builders Worker/Lead          |                |        Yes       |    |            |          |
+| HR Worker/Lead                |                |        Yes       |    |            |          |
+| Marketing Worker/Lead         |                |        Yes       |    |            |          |
+| Invitation                    |                |        \*        | 10 |            |          |
+| Staking Candidate             | what is this?? |        Yes       | 11 |            |          |
+| Bounties                      |                |        Yes       | ?  |            |          |
+
+\* It is not possible to initiation the invitation lock, it is automatically applied when a new member is invited on, hence the question of whether binding is required for applying the lock does not even apply.
+
+
 
 | Activity          | Exposure | Punishment |
 | ----------------- | :------: | :--------: |
@@ -31,17 +68,15 @@ One can currently stake funds for a range of activities, and the table below lis
 | Proposals         |    Yes   |    Yes\*   |
 | Worker\*\*        |    Yes   |     Yes    |
 
+\
+\
 _\* It varies across_ [_proposal types_](../governance/proposals.md#proposal-type) _whether punishment is actually used, but in the interest of keeping the staking model simple, it is assumed it always is. \*\* Can be both lead an non lead workers in a working group._
-
-## Implementation
-
-The way staking is implemented is with the use of account [locks](staking.md). Each purpose above has one or more fixed number of locks associated with it, each with its own fixed ID. This means it is very easy to simply look at an account and understand in what staking activity it is involved. Some purposes allow more than one account to hold stake for the given purpose, others do not. Some purposes allow for staking any account, while others require that you are staking with an account that has been bound to a specific membership. The this binding constraint comes from purposes where staking itself is associated with membership, and this binding allows initiation of staking with a single extrinsic signed with membership credentials, rather than having an additional extrinsic for each arbitrary account used for staking on each occasion.
 
 ## Reuse
 
 Given staking purposes A and B, we can say that stake is reusable across A and B if a token staked towards one can simultaneously count as staked towards the other. Since staking is implemented with locks, and locks do not stack, this means that a single account cannot be used for staking across two non-reusable purposes.
 
-\<figure?>
+`<figure?>`
 
 Reusability does imply that if there is a slashing event in the context of one of the two, stake in both has been reduced. This must be accounted for by platform actors, and for this reason it is currently not possible to reuse stake across two activities where both are subject to slashing. In fact, the only reuse allowed currently is when exactly one of A or B is voting. This is primarily to counteract the fact that voting is not incentivized, hence lowering the cost to vote is critical.
 
@@ -62,29 +97,6 @@ The table below summarizes the current reusability relationships, changing them 
 The table is symmetric, as all reuse relationships are symmetric, hence cells are omitted beyond the diagonal to ignore duplicate specification.
 
 _\*Any working group, and whether lead or normal worker._
-
-## Locks and Binding
-
-In what follows we attempt to briefly summarizes the what locks exist for what purposes, and on what accounts they are applied.
-
-| Purpose                  | Binding |  ID |
-| ------------------------ | :-----: | :-: |
-| Voting                   |    No   |  0  |
-| Council Candidate        |   Yes   |  1  |
-| Councilor                |   Yes   |  2  |
-| Validation               |    No   |  3  |
-| Nomination               |    No   |  4  |
-| Proposals                |   Yes   |  5  |
-| Storage Worker           |   Yes   |  6  |
-| Content Directory Worker |   Yes   |  7  |
-| Forum Worker             |   Yes   |  8  |
-|                          |         |     |
-|                          |         |     |
-| Membership Worker        |   Yes   |  9  |
-| Operations Worker        |         |     |
-| Invitation               |   Yes   |  10 |
-| Staking Candidate        |   Yes   |  11 |
-| Bounties                 |         |     |
 
 ## Reservation
 
