@@ -46,18 +46,19 @@ Reusability does imply that if there is a slashing event in the context of one o
 | Councilor                     |   Yes   |       2       | 0, 10, \*b"vesting " |
 | Validation                    |    No   | \*b"staking " | 0, 10, \*b"vesting " |
 | Nomination                    |    No   | \*b"staking " | 0, 10, \*b"vesting " |
-| Proposals                     |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Storage Worker/Lead           |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Proposals                     |   Yes   |       5       | 0, 10, \*b"vesting " |
+| Storage Worker/Lead           |   Yes   |       6       | 0, 10, \*b"vesting " |
+| Content Directory Worker/Lead |   Yes   |       7       | 0, 10, \*b"vesting " |
+| Forum Worker/Lead             |   Yes   |       8       | 0, 10, \*b"vesting " |
+| Membership Worker/Lead        |   Yes   |       9       | 0, 10, \*b"vesting " |
 | Distributor Worker/Lead       |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Content Directory Worker/Lead |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Forum Worker/Lead             |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Membership Worker/Lead        |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Builders Worker/Lead          |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Builders Worker/Lead          |   Yes   |       13      | 0, 10, \*b"vesting " |
+| Gateway Worker/Lead           |   Yes   |       14      | 0, 10, \*b"vesting " |
 | HR Worker/Lead                |   Yes   |       ?       | 0, 10, \*b"vesting " |
 | Marketing Worker/Lead         |   Yes   |       ?       | 0, 10, \*b"vesting " |
 | Invitation                    |   No\*  |       10      | 0...?                |
-| Staking Candidate             |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Bounty Entry                  |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Staking Candidate             |   Yes   |       11      | 0, 10, \*b"vesting " |
+| Bounty Entry                  |   Yes   |       12      | 0, 10, \*b"vesting " |
 
 \* It is not possible to initiation the invitation lock, it is automatically applied when a new member is invited on, hence the question of whether binding is required for applying the lock does not even apply.\
 \*\* Vesting is only going to be setup for accounts originating from mainnet genesis block, and so by definition no binding would be needed for that.
