@@ -32,33 +32,35 @@ Both are achieved by signing with for some account and in general they will not 
 
 ## Lock Overview
 
-In what follows we attempt to briefly summarizes the what locks exist for what purposes, and on what accounts they are applied. A critical concept we also cover is that of _account resuse_ for staking across different purposes, captured in the column `Compatible Lock IDs`. Briefly stated, given staking purposes A and B, we can say that stake is reusable across A and B if a token staked towards one can simultaneously count as staked towards the other. Since staking is implemented with locks, and locks do not stack, this means that a single account cannot be used for staking across two non-reusable purposes.
+In what follows we attempt to briefly summarizes the what locks exist for what purposes, and on what accounts they are applied. A critical concept we also cover is that of _account reuse_ for staking across different purposes, captured in the column `Compatible Lock IDs`. Briefly stated, given staking purposes A and B, we can say that stake is reusable across A and B if a token staked towards one can simultaneously count as staked towards the other. Since staking is implemented with locks, and locks do not stack, this means that a single account cannot be used for staking across two non-reusable purposes.
 
 `<figure?>`
 
 Reusability does imply that if there is a slashing event in the context of one of the two, stake in both has been reduced. This must be accounted for by platform actors, and for this reason it is currently not possible to reuse stake across two activities where both are subject to slashing. In fact, the main reuse allowed currently is when exactly one of A or B is voting or invitation funds. This is primarily to counteract the fact that voting is not incentivized, hence lowering the cost to vote is critical, and that invited users need to be able to use the system, respectively.
 
-| Purpose                       | Binding |  ID | Compatible Lock IDs |
-| ----------------------------- | :-----: | :-: | ------------------- |
-| Voting                        |    No   |  0  | All                 |
-| Council Candidate             |   Yes   |  1  | 0, 10               |
-| Councilor                     |   Yes   |  2  | 0, 10               |
-| Validation                    |    No   |  3  | 0, 10               |
-| Nomination                    |    No   |  4  | 0, 10               |
-| Proposals                     |   Yes   |  5  | 0, 10               |
-| Storage Worker/Lead           |   Yes   |  6  | 0, 10               |
-| Distributor Worker/Lead       |   Yes   |     | 0, 10               |
-| Content Directory Worker/Lead |   Yes   |  7  | 0, 10               |
-| Forum Worker/Lead             |   Yes   |  8  | 0, 10               |
-| Membership Worker/Lead        |   Yes   |  9  | 0, 10               |
-| Builders Worker/Lead          |   Yes   |     | 0, 10               |
-| HR Worker/Lead                |   Yes   |     | 0, 10               |
-| Marketing Worker/Lead         |   Yes   |     | 0, 10               |
-| Invitation                    |    \*   |  10 | 0                   |
-| Staking Candidate             |   Yes   |  11 | 0, 10               |
-| Bounty Entry                  |   Yes   |  ?  | 0, 10               |
+| Purpose                       | Binding |       ID      | Compatible Lock IDs  |
+| ----------------------------- | :-----: | :-----------: | -------------------- |
+| Voting                        |    No   |       0       | All                  |
+| Vesting                       |  No\*\* | \*b"vesting " | All                  |
+| Council Candidate             |   Yes   |       1       | 0, 10, \*b"vesting " |
+| Councilor                     |   Yes   |       2       | 0, 10, \*b"vesting " |
+| Validation                    |    No   | \*b"staking " | 0, 10, \*b"vesting " |
+| Nomination                    |    No   | \*b"staking " | 0, 10, \*b"vesting " |
+| Proposals                     |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Storage Worker/Lead           |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Distributor Worker/Lead       |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Content Directory Worker/Lead |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Forum Worker/Lead             |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Membership Worker/Lead        |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Builders Worker/Lead          |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| HR Worker/Lead                |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Marketing Worker/Lead         |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Invitation                    |   No\*  |       10      | 0...?                |
+| Staking Candidate             |   Yes   |       ?       | 0, 10, \*b"vesting " |
+| Bounty Entry                  |   Yes   |       ?       | 0, 10, \*b"vesting " |
 
-\* It is not possible to initiation the invitation lock, it is automatically applied when a new member is invited on, hence the question of whether binding is required for applying the lock does not even apply.
+\* It is not possible to initiation the invitation lock, it is automatically applied when a new member is invited on, hence the question of whether binding is required for applying the lock does not even apply.\
+\*\* Vesting is only going to be setup for accounts originating from mainnet genesis block, and so by definition no binding would be needed for that.
 
 ## Reservation
 
