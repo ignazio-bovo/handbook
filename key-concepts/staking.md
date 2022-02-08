@@ -17,11 +17,15 @@ Staking is used for two purposes to serve the system as a whole by providing mor
 1. **Exposure:** By requiring that someone who occupies a role that impacts the value of the system has exposure to that value in their portfolio. For this requirement to be effective, this exposure should not be hedgeable, and it is generally assumed that markets for this are missing. It is also assumed that any harm or benefit that results from the actions of the actor will capitalize in the value of the platform, and thus be partially reflected in the value of the stake. This should in total discourage harmful conduct and encourage beneficial conduct.
 2. **Punishment:** In cases where it is possible to, if only imperfectly, have the system adjudicate whether an actor has acted harmfully, the ability to slash funds as a result of such detection can generate very strong incentives for pro-social behavior. The adjudication may be purely cryptographic, or it may require some level of social consensus. In either case, to the extent that it reliably can detect failure - that is avoiding false positives and negatives, it is a very cost-effective means of generating incentives compared to the first approach. It's cheaper because it allows for less capital to be locked for a given level of deterrence effect.
 
-## Account Locks
+## Locks
 
 The way staking is implemented is with the use of account [locks](staking.md). Each purpose above has one or more fixed number of locks associated with it, each with its own fixed ID. This means it is very easy to simply look at an account and understand in what staking activity it is involved. Some purposes allow more than one account to hold stake for the given purpose, others do not. Some purposes allow for staking any account, while others require that you are staking with an account that has been bound to a specific membership. The this binding constraint comes from purposes where staking itself is associated with membership, and this binding allows initiation of staking with a single extrinsic signed with membership credentials, rather than having an additional extrinsic for each arbitrary account used for staking on each occasion.
 
-## Account Binding
+## Vesting
+
+`WIP`
+
+## Binding
 
 When initiating staking of some kind, it is very often - although not always, in the context of inhabiting some other kind of role, like being a member. This means that the initiating the staking effectively requires proving two things at the same time
 
@@ -30,7 +34,7 @@ When initiating staking of some kind, it is very often - although not always, in
 
 Both are achieved by signing with for some account and in general they will not be the same. As a result, it is required that a user connects - or _binds_, a given account which holds funds for the purposes of staking, to their membership, in advance of being able to use that account for staking as that member. This binding is a two step process, per account, where the first step is to turn the account into a _staking candidate_ by issuing a request to bind to a given member by signing via this account, and the second step is for the member to accept this candidate, using the controller account for that membership.
 
-## Lock Overview
+## Locks
 
 In what follows we attempt to briefly summarizes the what locks exist for what purposes, and on what accounts they are applied. A critical concept we also cover is that of _account reuse_ for staking across different purposes, captured in the column `Compatible Lock IDs`. Briefly stated, given staking purposes A and B, we can say that stake is reusable across A and B if a token staked towards one can simultaneously count as staked towards the other. Since staking is implemented with locks, and locks do not stack, this means that a single account cannot be used for staking across two non-reusable purposes.
 
@@ -38,10 +42,10 @@ In what follows we attempt to briefly summarizes the what locks exist for what p
 
 Reusability does imply that if there is a slashing event in the context of one of the two, stake in both has been reduced. This must be accounted for by platform actors, and for this reason it is currently not possible to reuse stake across two activities where both are subject to slashing. In fact, the main reuse allowed currently is when exactly one of A or B is voting or invitation funds. This is primarily to counteract the fact that voting is not incentivized, hence lowering the cost to vote is critical, and that invited users need to be able to use the system, respectively.
 
-| Lock                            | Binding |       ID      | Compatible Lock IDs  |
+| Lock                            | Binding |       ID      | Rivalrous            |
 | ------------------------------- | :-----: | :-----------: | -------------------- |
-| Voting                          |    No   |       0       | All                  |
-| Vesting                         |  No\*\* | \*b"vesting " | All                  |
+| Voting                          |    No   |       0       | No                   |
+| Vesting                         |  No\*\* | \*b"vesting " | No                   |
 | Council Candidate Staking       |   Yes   |       1       | 0, 10, \*b"vesting " |
 | Council Member Staking          |   Yes   |       2       | 0, 10, \*b"vesting " |
 | Validation & Nomination Staking |    No   | \*b"staking " | 0, 10, \*b"vesting " |
@@ -64,7 +68,7 @@ Reusability does imply that if there is a slashing event in the context of one o
 
 ## Reservation
 
-WIP.
+`WIP`
 
 ## Slashing
 
