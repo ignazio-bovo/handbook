@@ -36,32 +36,34 @@ Both are achieved by signing with for some account and in general they will not 
 
 ## Locks
 
-In what follows we attempt to briefly summarizes the what locks exist for what purposes, and on what accounts they are applied. A critical concept we also cover is that of _account reuse_ for staking across different purposes, captured in the column `Compatible Lock IDs`. Briefly stated, given staking purposes A and B, we can say that stake is reusable across A and B if a token staked towards one can simultaneously count as staked towards the other. Since staking is implemented with locks, and locks do not stack, this means that a single account cannot be used for staking across two non-reusable purposes.
+In what follows we attempt to briefly summarizes the what locks exist, their purposes and in what combinations are allowed on the same account. The reason some combinations of locks are acceptable, while others are not, stems from whether reusing capital across the two purposes of the locks is compatible with these purposes. Allowing capital to be reused has the benefit of more efficient use of capital for a single actor, reducing the barrier to getting involved in multiple activities simultaneously. At the same time, it may in some cases not be acceptable, if it ends up reducing the effective bond needed to generate good incentives for some form of participation.\
+\
+The model for reuse of accounts is quite simple. There is a finite set of lock types in the system, and they are partitioned into two subsets: rivalrous and non-rivalrous locks.
 
-`<figure?>`
+* No lock of a given type can be applied more than once to a given account.
+* Non-rivalrous locks can be combined with any other lock of any kind.
+* Rivalrous locks can only be combined with other non-rivalrous locks.
 
-Reusability does imply that if there is a slashing event in the context of one of the two, stake in both has been reduced. This must be accounted for by platform actors, and for this reason it is currently not possible to reuse stake across two activities where both are subject to slashing. In fact, the main reuse allowed currently is when exactly one of A or B is voting or invitation funds. This is primarily to counteract the fact that voting is not incentivized, hence lowering the cost to vote is critical, and that invited users need to be able to use the system, respectively.
-
-| Lock                            | Binding |       ID      | Rivalrous            |
-| ------------------------------- | :-----: | :-----------: | -------------------- |
-| Voting                          |    No   |       0       | No                   |
-| Vesting                         |  No\*\* | \*b"vesting " | No                   |
-| Council Candidate Staking       |   Yes   |       1       | 0, 10, \*b"vesting " |
-| Council Member Staking          |   Yes   |       2       | 0, 10, \*b"vesting " |
-| Validation & Nomination Staking |    No   | \*b"staking " | 0, 10, \*b"vesting " |
-| Proposals Staking               |   Yes   |       5       | 0, 10, \*b"vesting " |
-| Storage WG Staking              |   Yes   |       6       | 0, 10, \*b"vesting " |
-| Content Directory WG Staking    |   Yes   |       7       | 0, 10, \*b"vesting " |
-| Forum WG Staking                |   Yes   |       8       | 0, 10, \*b"vesting " |
-| Membership WG Staking           |   Yes   |       9       | 0, 10, \*b"vesting " |
-| Distributor WG Staking          |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Builders WG Staking             |   Yes   |       13      | 0, 10, \*b"vesting " |
-| Gateway WG Staking              |   Yes   |       14      | 0, 10, \*b"vesting " |
-| HR WG Staking                   |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Marketing WG Staking            |   Yes   |       ?       | 0, 10, \*b"vesting " |
-| Invitation                      |   No\*  |       10      | 0...?                |
-| Bound Staking Account           |   Yes   |       11      | 0, 10, \*b"vesting " |
-| Bounty Entry Staking            |   Yes   |       12      | 0, 10, \*b"vesting " |
+| Lock                            | Binding |       ID      | Rivalrous |
+| ------------------------------- | :-----: | :-----------: | --------- |
+| Voting                          |    No   |       0       | No        |
+| Vesting                         |  No\*\* | \*b"vesting " | No        |
+| Invitation                      |   No\*  |       10      | No        |
+| Bound Staking Account           |   Yes   |       11      | No        |
+| Council Candidate Staking       |   Yes   |       1       | Yes       |
+| Council Member Staking          |   Yes   |       2       | Yes       |
+| Validation & Nomination Staking |    No   | \*b"staking " | Yes       |
+| Proposals Staking               |   Yes   |       5       | Yes       |
+| Storage WG Staking              |   Yes   |       6       | Yes       |
+| Content Directory WG Staking    |   Yes   |       7       | Yes       |
+| Forum WG Staking                |   Yes   |       8       | Yes       |
+| Membership WG Staking           |   Yes   |       9       | Yes       |
+| Distributor WG Staking          |   Yes   |       ?       | Yes       |
+| Builders WG Staking             |   Yes   |       13      | Yes       |
+| Gateway WG Staking              |   Yes   |       14      | Yes       |
+| HR WG Staking                   |   Yes   |       ?       | Yes       |
+| Marketing WG Staking            |   Yes   |       ?       | Yes       |
+| Bounty Entry Staking            |   Yes   |       12      | Yes       |
 
 \* It is not possible to initiation the invitation lock, it is automatically applied when a new member is invited on, hence the question of whether binding is required for applying the lock does not even apply.\
 \*\* Vesting is only going to be setup for accounts originating from mainnet genesis block, and so by definition no binding would be needed for that.
