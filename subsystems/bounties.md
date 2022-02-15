@@ -327,9 +327,9 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 #### Conditions
 
 * `origin` corresponds to identifier `member_id` for a member.
-* `bounty_id` corresponds to an existing `bounty`.
-* `entry_id` corresponds to an entry `entry` where worker has identifier `member_id` and the status is not `CashedOut` or `Rejected` or `Withdrawn`.
-* `bounty` is in stage `Withdrawal Period`.
+* `bounty_id` corresponds to an existing bounty `bounty`.
+* `entry_id` corresponds to an entry `entry` where worker has identifier `member_id` and the status is not `CashedOut`or `Rejected` or `Withdrawn` .
+* `bounty` is in stage`Withdrawal Period`.
 
 #### Effect
 
