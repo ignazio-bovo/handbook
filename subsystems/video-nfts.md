@@ -137,13 +137,13 @@ The following constants are hard coded into the system, they can only be updated
 ### Issue NFT
 
 **Parameters**
-
-| `actor`    | The `ContentActor` attempting to issue the NFT.                |
-| ---------- | -------------------------------------------------------------- |
-| `video_id` | Video on which NFT is to be issued.                            |
-| `royalty`  | If present, the royalty for all future auctions                |
-| `metadata` | The raw metadata for the issuance.                             |
-| `to`       | If present, the member who should be set as the initial owner. |
+| `actor`                     | The `ContentActor` attempting to issue the NFT.                |
+|-----------------------------|----------------------------------------------------------------|
+| `video_id`                  | Video on which NFT is to be issued.                            |
+| `royalty`                   | If present, the royalty for all future auctions                |
+| `metadata`                  | The raw metadata for the issuance.                             |
+| `non_channel_owner`         | If present, the member who should be set as the initial owner. |
+| `init_transactional_status` | Initial status the nft in issuance should be set to. |
 
 #### Conditions
 
