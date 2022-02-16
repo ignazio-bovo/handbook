@@ -1,7 +1,7 @@
 ---
 description: >-
   Funding public goods where the community can help with financing, experts can
-  help adjudicate quality of deliverables and service providers have an
+  help adjudicate quality of deliverables, and service providers have an
   incentive to find popular initiatives.
 ---
 
@@ -13,13 +13,13 @@ The only other way to fund the production of goods that create benefits to a bro
 
 ## Assurance Contracts and Dominant Assurance Contracts
 
-An assurance contract is a funding scheme which is intended to override the inherent free-riding problem in financing public goods by allowing contributors to enter into binding conditional commitments to provide resources to fund the good if a sufficient level of funding is committed. By setting the level sufficiently high, every public good beneficiary becomes close to pivotal to getting the good produced, which generates a rationale incentive to unilaterally commit. Dominant assurance contracts are such schemes where the funding has to be deployed towards a specific service provider or entrepreneur who will produce the good using the funding, and in exchange for this privileged to possibly generate a profit from this activity, the entrepreneur has to put up an initial bounty, called a _cherry_ , which is split among all contributors pro-rata. This cherry generates an incentive for contributors, as even when the funding fails, they get a benefit.
+An assurance contract is a funding scheme intended to override the inherent free-riding problem in financing public goods by allowing contributors to enter into binding conditional commitments to provide resources to fund the good if a sufficient level of funding is committed. By setting the level sufficiently high, every public good beneficiary becomes close to pivotal to getting the good produced, which generates a rationale incentive to unilaterally commit. Dominant assurance contracts are such schemes where the funding has to be deployed towards a specific service provider or entrepreneur who will produce the good using the funding, and in exchange for this privileged to possibly generate a profit from this activity, the entrepreneur has to put up an initial bounty, called a _cherry_, which is split among all contributors pro-rata. This cherry generates an incentive for contributors, as even when the funding fails, they get a benefit.
 
 ## Roles
 
-* **Creator:** The agent responsible for creating the bounty, is either a specific member, or the council.
-* **Oracle:** The agent responsible for deciding the outcome of a bounty where entrants have submitted work. Is either a specific member, or the council as whole.
-* **Contributor:** An agent responsible for contributing funds that finance the bounty. Is either a specific member or the council as a whole.
+* **Creator:** The agent responsible for creating the bounty is either a specific member, or the council.
+* **Oracle:** The agent responsible for deciding the outcome of a bounty where entrants have submitted work. Is either a specific member, or the council as a whole.
+* **Contributor:** An agent responsible for contributing funds that finance the bounty. It is either a specific member or the council as a whole.
 * **Worker:** A member who has announced their participation in producing deliverable in a given bounty.
 
 Notice that when the council is an actor, it means that if the lifetime of a bounty spans the boundary of two councils, then a different set of council members are likely in place to exercise control over the same bounty.
@@ -28,25 +28,25 @@ Notice that when the council is an actor, it means that if the lifetime of a bou
 
 ### Bounty Actor
 
-For the act of creating, or contributing funds to a bounty, they can be done by either a member or the council as a whole, the concept of a _bounty actor_ refers therefore to either a specific member or the council, and represents this actor in a unified way.
+The act of creating or contributing funds to a bounty can be done by either a member or the council as a whole, the concept of a _bounty actor_ refers, therefore, to either a specific member or the council, and represents this actor in a unified way.
 
 ### Funding Period Type
 
 The funding period type refers to how funds are collected for the benefit of a bounty, and there are fundamentally two types:
 
 * **Perpetual:** The funding has not preset termination date, and new contributors can join on an ongoing basis. There is however a _target_ which sets the upper bound for how much can be contributed.
-* **Limited:** The funding lasts for no longer than a given number of blocks, called the _funding period_ . There is a lower bound and upper bound for how much must be contributed
+* **Limited:** The funding lasts for no longer than a given number of blocks, called the _funding period_. There is a lower bound and upper bound for how much must be contributed
 
 ### Bounty Type
 
-There are two types of bounties in terms of who can participate as worker. There are _open_ bounties, where any member can participate, and there are _closed_ bounties, where the creator can pre-select a set of member who can participate. The primary purpose of closed bounties is to enable dominant assurance contracts, where the creator combines setting themselves as the only feasible worker with also providing a cherry.
+There are two types of bounties in terms of who can participate as a worker. There are _open_ bounties, where any member can participate, and _closed_ bounties, where the creator can pre-select a set of members who can participate. The primary purpose of closed bounties is to enable dominant assurance contracts, where the creator combines setting themselves as the only feasible worker with also providing a cherry.
 
 ### Work Entry
 
 For someone to be able to participate as a worker, with the opportunity to capture some portion of the funds accumulated for the bounty, they have to announce their participation in the bounty in the form of a _work entry_. It describes the status of the involvement of a worker in a bounty, and it is defined by the following information:
 
 * **EntryId:** Unique non-negative integer identifier across all entries.
-* **Worker:** Member Id of worker.
+* **Worker:** Member Id of a worker.
 * **Staking Account:** Account holding funds used to stake for participation in bounty.
 * **Work:** List of work submissions made during the `Working Period`, encoded as structure data in a standardized format.
 * **Status:** The status of an entry has the following disjoint variants.
@@ -59,7 +59,7 @@ For someone to be able to participate as a worker, with the opportunity to captu
 
 ### Bounty
 
-A bounty is defined is defined by the following information
+A bounty is defined by the following information
 
 * **BountyId:** Unique non-negative integer identifier across all bounties.
 * **Oracle:** Bounty oracle, is either a member or the council.
@@ -78,8 +78,8 @@ A bounty is defined is defined by the following information
 
 Below is a list of the stages a bounty can be in, and what each of them mean:
 
-* **Funding Period:** This is the initial stage of a bounty once it is created, and it is during this stage that the bounty can accept funding contributions. It is also during this stage the bounty can be vetoed by the council. The creator can also cancel the bounty in this stage if there are no contributions. If a contribution is made that brings the cumulative funding equal to or above the upper bound, then the difference is returned, and the bounty proceeds to the `Working Period` stage. Lastly if the funding period is limited and the time passes this time, then the bounty proceeds to the `Experied Funding Period`stage if there was at least one contribution made, otherwise it proceeds to the `Bounty Failed` stage.
-* **Expired Funding Period:** During this stage the bounty is only waiting to get cancelled by the creator, terminating the bounty.
+* **Funding Period:** This is the initial stage of a bounty once it is created, during this stage the bounty can accept funding contributions. It is also during this stage the bounty can be vetoed by the council. The creator can also cancel the bounty in this stage if there are no contributions. If a contribution is made that brings the cumulative funding equal to or above the upper bound, then the difference is returned, and the bounty proceeds to the `Working Period` stage. Lastly, if the funding period is limited and the time passes this time, then the bounty proceeds to the `Bounty Failed` stage if there was at least one contribution made, otherwise it proceeds to the `Expried Funding Period` stage.
+* **Expired Funding Period:** During this stage, the bounty is only waiting to get cancelled by the creator, terminating the bounty.
 * **Working Period:** This is the stage where workers announce their entries and submit their work, and optionally also withdraw. After the working period length has expired since the initiation of the working period, the stage transitions to the `Judgement Period`.
 * **Judgement Period:** This is the stage during which the oracle can evaluate the submitted work entries during the working periods. The judgement identifies a set of winning contributors, possibly empty, each with a non-zero number of tokens as a reward. The total reward must perfectly consume the contributed funding to the bounty, but reward distribution need not be uniform. If the oracle selects an empty set of winners, or does not provide a judgement within the end of the judgement period, a transition is made to the `Bounty Failed` stage, otherwise a transition to `Bounty Successful` stage is made if the set is non-empty.
 * **Withdrawal Period:** This represents the stage where funds can be withdrawn from the bounty, eventually leading to the bounty getting terminated.
@@ -101,8 +101,8 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 | `MinOracleCherryLimit`    | Min oracle cherry for a bounty.                                                                 |
 | `MinFundingLimit`         | Min funding amount for a bounty.                                                                |
 | `MinWorkEntrantStake`     | Min work entrant stake for a bounty.                                                            |
-| `ModuleAccountId`         | Account id of built in account used to hold funds and cherries contributed across all bounties. |
-| `LOCK_ID`                 | The Id for the lock used to stake in bounty system.                                             |
+| `ModuleAccountId`         | The Account id of a built-in account, used to hold funds and cherries contributed across all bounties. |
+| `LOCK_ID`                 | The Id for the lock used to stake in the bounty system.                                             |
 
 ## Extrinsics
 
@@ -156,9 +156,9 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 #### Conditions
 
 * `origin` corresponds to `creator`.
-* `bounty_id` corresponds to an existing bounty `bounty`.
-* `creator`created bounty identified by `bounty_id`.
-* `bounty` is either in stage `Funding Period` without any contributions, or is in stage `Funding Expired`.
+* `bounty_id` corresponds to an existing `bounty`.
+* `creator` created bounty identified by `bounty_id`.
+* `bounty` is either in stage `Funding Period` without any contributions, or is in stage `Expried Funding Period`.
 
 #### Effect
 
@@ -170,17 +170,17 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 
 **Parameters**
 
-| Name        | Description                                           |
-| ----------- | ----------------------------------------------------- |
-| `origin`    | Caller origin.                                        |
-| `funder`    | Bounty actor for funder.                              |
-| `bounty_id` | Identifier for bounty to be funded.                   |
-| `amount`    | Balance to be contributed towards bounty from funder. |
+| Name        | Description                                                   |
+| ----------- | ------------------------------------------------------------- |
+| `origin`    | Caller origin.                                                |
+| `funder`    | Bounty actor for the funder.                                  |
+| `bounty_id` | Identifier for the bounty to be funded.                       |
+| `amount`    | Balance to be contributed towards the bounty from the funder. |
 
 #### Conditions
 
-* `origin` corresponds to `funder`.
-* `bounty_id` corresponds to an existing bounty `bounty`.
+* `origin` corresponds to the `funder`.
+* `bounty_id` corresponds to an existing `bounty`.
 * `bounty` is in stage `Funding Period`.
 * `funder` can cover `amount`.
 * `amount` is no less than `MinFundingLimit`.
@@ -195,18 +195,18 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 
 **Parameters**
 
-| Name        | Description                         |
-| ----------- | ----------------------------------- |
-| `origin`    | Caller origin.                      |
-| `funder`    | Bounty actor for funder.            |
-| `bounty_id` | Identifier for bounty to be funded. |
+| Name        | Description                             |
+| ----------- | --------------------------------------- |
+| `origin`    | Caller origin.                          |
+| `funder`    | Bounty actor for the funder.            |
+| `bounty_id` | Identifier for the bounty to be funded. |
 
 #### Conditions
 
-* `origin` corresponds to `funder` .
-* `bounty_id` corresponds to an existing bounty `bounty` .
-* `bounty` is in stage `Bounty Failed` .
-* `funder`has made a contribution to the `bounty` that has not been withdrawn.
+* `origin` corresponds to the `funder`.
+* `bounty_id` corresponds to an existing `bounty`.
+* `bounty` is in stage `Bounty Failed`.
+* `funder` has made a contribution to the `bounty` that has not been withdrawn.
 
 #### Effect
 
@@ -222,23 +222,23 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 | -------------------- | ----------------------------------------------------------------------- |
 | `origin`             | Caller origin.                                                          |
 | `member_id`          | Member identifier of prospective worker.                                |
-| `bounty_id`          | Identifier for bounty in which member wants to join.                    |
+| `bounty_id`          | Identifier for the bounty in which member wants to join.                |
 | `staking_account_id` | Account balance.                                                        |
 | `metadata`           | Structured metadata describing the work entry in a human readable form. |
 
 #### Conditions
 
 * `origin` corresponds to identifier `member_id` for a member.
-* `bounty_id` corresponds to an existing bounty `bounty`.
+* `bounty_id` corresponds to an existing `bounty`.
 * `bounty` is in stage `Working Period`.
-* `member_id` does not have an active work entry on `bounty` .
+* `member_id` does not have an active work entry on `bounty`.
 * If `bounty` is a closed bounty, then `memeber_id` is among the permitted participants.
 * `staking_account_id` is a staking account associated with the member, and has a free balance no less than `MinWorkEntrantStake` and no conflicting staking locks present.
 
 #### Effect
 
 * A work entry is added for the member to the bounty, in the `Working` state.
-* Account with id `staking_account_id` has lock with Id `LOCK_ID` and of size`MinWorkEntrantStake`set.
+* Account with id `staking_account_id` has lock with Id `LOCK_ID` and of size `MinWorkEntrantStake` set.
 
 ### Withdraw Work Entry
 
@@ -254,13 +254,13 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 #### Conditions
 
 * `origin` corresponds to identifier `member_id` for a member.
-* `bounty_id` corresponds to an existing bounty `bounty`.
+* `bounty_id` corresponds to an existing `bounty`.
 * `bounty` is in stage `Working Period`.
 * `entry_id` corresponds to an entry `entry` with status `Working` and where the worker has identifier
 
 #### Effect
 
-* The `entry` status is set to `Withdrawn` .
+* The `entry` status is set to `Withdrawn`.
 * The staking account of the entry has lock with Id `LOCK_ID` removed, and the account is slashed a share of the staked balance equal to the share of the working period length for which the entry had the status `Working`.
 
 ### Submit Work
@@ -270,7 +270,7 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 | Name        | Description                                            |
 | ----------- | ------------------------------------------------------ |
 | `origin`    | Caller origin.                                         |
-| `member_id` | Member identifier for worker.                          |
+| `member_id` | Member identifier for a worker.                        |
 | `bounty_id` | Identifier for bounty to which work entry corresponds. |
 | `entry_id`  | Identifier for work entry.                             |
 | `work_data` | Encoded work metadata.                                 |
@@ -278,13 +278,13 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 #### Conditions
 
 * `origin` corresponds to identifier `member_id` for a member.
-* `bounty_id` corresponds to an existing bounty `bounty`.
+* `bounty_id` corresponds to an existing `bounty`.
 * `bounty` is in stage `Working Period`.
 * `entry_id` corresponds to an entry `entry` with status `Working` and where the worker has identifier
 
 #### Effect
 
-`None` .
+`None`.
 
 ### Submit Oracle Judgement
 
@@ -300,7 +300,7 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 #### Conditions
 
 * `origin` corresponds to identifier `member_id` for a member.
-* `bounty_id` corresponds to an existing bounty `bounty`.
+* `bounty_id` corresponds to an existing `bounty`.
 * `bounty` is in stage `Working Period`.
 * `judgement` references two disjoint sets of entries that all have status `Working`
   * a, possibly empty, set of entries designated as winners, each having submitted at least one work submission, and each with an associated non-zero balance designated as the reward, and where all rewards add up to the total funding of the bounty.
@@ -308,8 +308,8 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 
 #### Effect
 
-* for each winner entry referenced by `judgement` , credit worker account and debited from `ModuleAccountId` , remove lock with Id `LOCK_ID` , and set status to `Winner`.
-* for each rejected entry referenced by `judgement` , apply slashing, remove lock with Id `LOCK_ID` , and set status to `Rejected`.
+* for each winner entry referenced by `judgement`, credit worker account and debited from `ModuleAccountId`, remove lock with Id `LOCK_ID`, and set status to `Winner`.
+* for each rejected entry referenced by `judgement`, apply slashing, remove lock with Id `LOCK_ID`, and set status to `Rejected`.
 * transition bounty to stage `Bounty Failed` if there are no winners, otherwise transition to `Bounty Successful`.
 * credit oracle account with oracle cherry, and debited from `ModuleAccountId`.
 
@@ -320,7 +320,7 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 | Name        | Description                                            |
 | ----------- | ------------------------------------------------------ |
 | `origin`    | Caller origin.                                         |
-| `member_id` | Member identifier for worker.                          |
+| `member_id` | Member identifier for a worker.                        |
 | `bounty_id` | Identifier for bounty to which work entry corresponds. |
 | `entry_id`  | Identifier for work entry.                             |
 
@@ -333,6 +333,6 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 
 #### Effect
 
-* if `entity` has status `Winner` , then the associated reward is credited to `member_id` controller account and debited from `ModuleAccountId`.
+* if `entity` has status `Winner`, then the associated reward is credited to `member_id` controller account and debited from `ModuleAccountId`.
 * `entity` staking account has lock with Id `LOCK_ID` removed.
 * `entity` status is updated to `CashedOut`.
