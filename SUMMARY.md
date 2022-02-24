@@ -5,6 +5,7 @@
 ## Key Concepts
 
 * [Staking](key-concepts/staking.md)
+* [Module Accounts](key-concepts/module-accounts.md)
 * [Fees](key-concepts/fees.md)
 * [Encodings](key-concepts/encodings.md)
 * [Glossary](key-concepts/glossary.md)
@@ -19,29 +20,20 @@
 
 * [Membership](subsystems/membership.md)
 * [Content Directory](subsystems/content-directory.md)
+* [NFTs](subsystems/video-nfts.md)
 * [Forum](subsystems/forum.md)
 * [Council Blog](subsystems/council-blog.md)
 * [Bounties](subsystems/bounties.md)
-* [Storage](subsystems/storage.md)
-* [Bandwidth](subsystems/bandwidth.md)
+* [Storage & Bandwidth](subsystems/storage/README.md)
+  * [Data Directory](subsystems/storage/data-directory.md)
+  * [Storage Node](subsystems/storage/storage-node-colossus.md)
+  * [Bandwidth Node](subsystems/storage/distributor-node-argus.md)
 * [Gateways](subsystems/gateways.md)
 * [Builders](subsystems/builders.md)
 * [EVM](subsystems/evm.md)
-* [Content Finance](subsystems/content-finance.md)
 * [Validation](subsystems/validation.md)
 * [Interoperability](subsystems/interoperability.md)
 
 ## Guides
 
 * [Runtime Upgrade](guides/runtime-upgrade.md)
-
-## Applications
-
-* [Atlas](applications/atlas.md)
-* [Pioneer](applications/pioneer.md)
-* [Hydra](applications/hydra.md)
-* [Colossus](applications/colossus.md)
-* [Orion](applications/orion.md)
-* [Charon](applications/charon.md)
-* [CLI](applications/cli.md)
-

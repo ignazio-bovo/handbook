@@ -1,5 +1,7 @@
 # Content Directory
 
+## \*\*Warning: documentation of the content directory is stale, new documentation is forthcoming.\*\*
+
 ## Introduction
 
 The content directory is an on-chain index of all content and metadata, and related concepts - such as channels and playlists. The data model was conceived to facilitate publishing and curation objectives inherent to the platform within the constraints of the blockchain environment, as a result, it has the following four major design traits:
@@ -36,7 +38,7 @@ An `entity` represents a particular instance of a class, hence each entity corre
 * `London`: is an entity, representing the city of that name, of the `Place` class.
 * `BobLivedInLondon`: is an entity, representing the fact that the person `Bob` has lived in place `London`, of the `PersonLivedInPlace` class.
 
-There are a finite number of entities of each class in the content directory at any given time, and each is identified \(across all classes\) by a unique positive integer called the `entity id`. They start at `0`, and are incremented by one for each new entity is created. This is the identifier the blockchain uses for entities, however, there is also a unique name and description property for each class, just for convenience. Importantly, the name uniqueness for entities is only within the corresponding class.
+There are a finite number of entities of each class in the content directory at any given time, and each is identified (across all classes) by a unique positive integer called the `entity id`. They start at `0`, and are incremented by one for each new entity is created. This is the identifier the blockchain uses for entities, however, there is also a unique name and description property for each class, just for convenience. Importantly, the name uniqueness for entities is only within the corresponding class.
 
 ### Schemas
 
@@ -54,7 +56,7 @@ A `property type` represents a value constraint in four different ways. First, i
 
 Second, whether the value can optionally be set to undefined or null value, in addition to its normal value range. Third, whether it is locked from being mutated by certain roles, the details of which are fully explained in the permissions model section. Lastly, fourth, whether entity references, should respect ownership, the details of which are fully explained in the permissions model section.
 
-A property type corresponds to exactly one class, and is identified with unique positive integer \(within that class\), called a `property type id`. They start at `0`, and are incremented by one for each new type added for a given class. In addition, they also have a unique name \(within that class\), and a description. Following on from our example, some natural property types for the `Person` class, identified here by their name, could be
+A property type corresponds to exactly one class, and is identified with unique positive integer (within that class), called a `property type id`. They start at `0`, and are incremented by one for each new type added for a given class. In addition, they also have a unique name (within that class), and a description. Following on from our example, some natural property types for the `Person` class, identified here by their name, could be
 
 1. **firstName:** Text up to 20 bytes
 2. **isMarried:** Bool
@@ -73,16 +75,16 @@ Assume that they were introduced in order, and notice that a schema may both reu
 
 A `property value` is a value that corresponds to a property type in a given class, and respects the constraints imposed by that type. Each entity is said to support one or more of the schemas associated with the corresponding class, and for each unique property type in those schemas, the entity has a property value. The way property values are added to an entity is in-fact only in the context of introducing support for some schema that references a property type for which the entity does not already have a value. Building further upon our example, let's assume `Bob` supports schemas 1, in which case he could have property values
 
-1. **firstName \(due to 1\):** Robert
-2. **isMarried \(due to 1\):** false
-3. **isMale \(due to 1\):** true
+1. **firstName (due to 1):** Robert
+2. **isMarried (due to 1):** false
+3. **isMale (due to 1):** true
 
 Then support for schema 2 is introduced for `Bob`, in which case he could now have property values
 
-1. **firstName \(due to 1 and 2\):** Robert
-2. **isMarried \(due to 1\):** false
-3. **isMale \(due to 1\):** true
-4. **bestFriendId \(due to 2\):** 3
+1. **firstName (due to 1 and 2):** Robert
+2. **isMarried (due to 1):** false
+3. **isMale (due to 1):** true
+4. **bestFriendId (due to 2):** 3
 
 where 3 is entity id of some other `Person` entity. Notice here the benefit that schemas that share property types will share values, avoiding duplication.
 
@@ -108,14 +110,14 @@ There are four roles in the content directory, namely
 Beyond these explicit roles, there are three types of status that can apply to subsets of these roles.
 
 * **Curator group membership:** There is also the concept of a _curator group_, which is a group with one or more member curators that can rotate in and out. The number of curator groups can change over time, as the lead and add and remove them, and the lead also manages the presence of curators in such groups. All actions accessible to a curator is by virtue of membership in one such group. The reason for this extra level of indirection is not only that curators are likely to work in groups, where each group corresponds to permissions that reflect some coherent set of responsibilities, but also so that it is easy to withdraw permissions from an individual curator, without having to update a lot of state. Lastly, a group also has a status, which is either enabled or disabled, where the latter status makes it impossible to act under that status at that time.
-* **Class maintainer:** This is a status that a curator group can occupy for a given class, and a class can have none or multiple such maintainer groups. A maintainer is automatically granted the ability to create entities of that class, and is also set as the controller when doing so \(see next point\). Individual property types can also be configured to prevent or allow corresponding property values to not be mutable by the maintainer.
-* **Entity controller:** This is a status that can be held by either
+* **Class maintainer:** This is a status that a curator group can occupy for a given class, and a class can have none or multiple such maintainer groups. A maintainer is automatically granted the ability to create entities of that class, and is also set as the controller when doing so (see next point). Individual property types can also be configured to prevent or allow corresponding property values to not be mutable by the maintainer.
+*   **Entity controller:** This is a status that can be held by either
 
-  * the lead
-  * a specific member
-  * maintainers of the class
+    * the lead
+    * a specific member
+    * maintainers of the class
 
-  for a specific entity, hence each entity will have an independent controller. Individual property types can also be configured to prevent or allow corresponding property values to not be mutable by the controller.
+    for a specific entity, hence each entity will have an independent controller. Individual property types can also be configured to prevent or allow corresponding property values to not be mutable by the controller.
 
 ### Personae
 
@@ -380,4 +382,3 @@ WIP.
 ## Current Model
 
 WIP.
-

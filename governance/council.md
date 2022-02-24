@@ -55,13 +55,13 @@ The budget of the council is the root resource pool for all token minting on the
 
 Whenever one of the following actions occur, the budget is impacted as described.
 
-| Event | Budget Impact |
-| :--- | :--- |
-| Working group budget increased by `X > 0` | `-X` |
-| Working group budget decreased by `X > 0` | `+X` |
-| Spending proposal with amount `X > 0` | `-X` |
-| Council reward payout `X > 0` | `-X` |
-| Budget period ends | `+budget_increment` |
+| Event                                     | Budget Impact       |
+| ----------------------------------------- | ------------------- |
+| Working group budget increased by `X > 0` | `-X`                |
+| Working group budget decreased by `X > 0` | `+X`                |
+| Spending proposal with amount `X > 0`     | `-X`                |
+| Council reward payout `X > 0`             | `-X`                |
+| Budget period ends                        | `+budget_increment` |
 
 Events that negatively impact the budget balance can only occur if the impact does not occur if they exceed the balance of the budget.
 
@@ -106,7 +106,7 @@ Notice that, while there is no explicit identifier, a councilorship can be impli
 
 A vote is a defined by the following
 
-* **Staking account:** Holds the stake associated with the vote. A given account can only be involved in a single vote for a given election cycle \(see [Council](council.md#election)\).
+* **Staking account:** Holds the stake associated with the vote. A given account can only be involved in a single vote for a given election cycle (see [Council](council.md#election)).
 * **Staking balance:** The amount of funds in the staking account encumbered for this vote, will be no less than `MINIUMUM_VOTING_STAKE`.
 * **Cycle Id:** The election cycle in which the vote was cast.
 * **Stage:** The vote has two stages, being _sealed_ and _unsealed, each having the following associated information_
@@ -137,121 +137,22 @@ The stages and transitions, are summarized in the figure below.
 
 The following constants are hard coded into the system, they can only be updated with a runtime upgrade.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Description</th>
-      <th style="text-align:left">Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>NUMBER_OF_COUNCIL_SEATS</code>
-      </td>
-      <td style="text-align:left">The number of council seats.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>IDLE_PERIOD_LENGTH</code>
-      </td>
-      <td style="text-align:left">The number of blocks in the normal period.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>ANNOUNCING_PERIOD_LENGTH</code>
-      </td>
-      <td style="text-align:left">The number of blocks in the announcing period</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>VOTING_PERIOD_LENGTH</code>
-      </td>
-      <td style="text-align:left">The number of blocks in the voting period.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>REVEALING_PERIOD_LENGTH</code>
-      </td>
-      <td style="text-align:left">The number of blocks in the revealing period.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>REWARD_PERIOD_LENGTH</code>
-      </td>
-      <td style="text-align:left">The number or blocks between each reward
-        <br />payout to councilors.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>BUDGET_PERIOD_LENGTH</code>
-      </td>
-      <td style="text-align:left">
-        <p>The number of blocks between each time the the</p>
-        <p>council budget is topped up.</p>
-      </td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>REQUIRED_CANDIDACY_STAKE</code>
-      </td>
-      <td style="text-align:left">The required amount of stake for a candidate.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MINIMUM_VOTING_STAKE</code>
-      </td>
-      <td style="text-align:left">The minimum allowable stake in a vote.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MAX_SALT_LENGTH</code>
-      </td>
-      <td style="text-align:left">The maximum length of salt is used to calculate a vote&apos;s sealed commitment.</td>
-      <td
-      style="text-align:left"><code>fill-in</code>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MINIMUM_CANDIDATES_COUNT</code>
-      </td>
-      <td style="text-align:left">The minimum number of candidates needed for the election to become legitimate.</td>
-      <td
-      style="text-align:left"><code>fill-in</code>
-        </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>VOTING_LOCK_ID</code>
-      </td>
-      <td style="text-align:left">The Id for the lock used to vote.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>CANDIDACY_LOCK_ID</code>
-      </td>
-      <td style="text-align:left">The Id for the lock used for candidacy.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>COUNCILOR_LOCK_ID</code>
-      </td>
-      <td style="text-align:left">The Id for the lock used for councilorship.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name                       | Description                                                                              | Value     |
+| -------------------------- | ---------------------------------------------------------------------------------------- | --------- |
+| `NUMBER_OF_COUNCIL_SEATS`  | The number of council seats.                                                             | `fill-in` |
+| `IDLE_PERIOD_LENGTH`       | The number of blocks in the normal period.                                               | `fill-in` |
+| `ANNOUNCING_PERIOD_LENGTH` | The number of blocks in the announcing period                                            | `fill-in` |
+| `VOTING_PERIOD_LENGTH`     | The number of blocks in the voting period.                                               | `fill-in` |
+| `REVEALING_PERIOD_LENGTH`  | The number of blocks in the revealing period.                                            | `fill-in` |
+| `REWARD_PERIOD_LENGTH`     | <p>The number or blocks between each reward<br>payout to councilors.</p>                 | `fill-in` |
+| `BUDGET_PERIOD_LENGTH`     | <p>The number of blocks between each time the the</p><p>council budget is topped up.</p> | `fill-in` |
+| `REQUIRED_CANDIDACY_STAKE` | The required amount of stake for a candidate.                                            | `fill-in` |
+| `MINIMUM_VOTING_STAKE`     | The minimum allowable stake in a vote.                                                   | `fill-in` |
+| `MAX_SALT_LENGTH`          | The maximum length of salt is used to calculate a vote's sealed commitment.              | `fill-in` |
+| `MINIMUM_CANDIDATES_COUNT` | The minimum number of candidates needed for the election to become legitimate.           | `fill-in` |
+| `VOTING_LOCK_ID`           | The Id for the lock used to vote.                                                        | `fill-in` |
+| `CANDIDACY_LOCK_ID`        | The Id for the lock used for candidacy.                                                  | `fill-in` |
+| `COUNCILOR_LOCK_ID`        | The Id for the lock used for councilorship.                                              | `fill-in` |
 
 ## Extrinsics
 
@@ -259,19 +160,19 @@ The following constants are hard coded into the system, they can only be updated
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `membership_id` | Membership id uniquely identifying the user. |
-| `staking_account_id` | Staking account. |
-| `reward_account_id` | Account receiving councilors rewards in the case candidate gets elected. |
-| `stake` | Amount of currency user wants to stake for the candidacy. |
+| Name                 | Description                                                              |
+| -------------------- | ------------------------------------------------------------------------ |
+| `membership_id`      | Membership id uniquely identifying the user.                             |
+| `staking_account_id` | Staking account.                                                         |
+| `reward_account_id`  | Account receiving councilors rewards in the case candidate gets elected. |
+| `stake`              | Amount of currency user wants to stake for the candidacy.                |
 
 #### Conditions
 
 * Signer is controller account of member with identifier `membership_id`.
 * There is an active election in the **Announcement Period**.
 * There is no prior candidacy in this election for `membership_id`.
-* `staking_account_id` has no conflicting locks \(see [Staking](../key-concepts/staking.md#reuse)\).
+* `staking_account_id` has no conflicting locks (see [Staking](../key-concepts/staking.md#reuse)).
 * `staking_account_id` has enough balance to be locked as candidacy stake.
 * `staking_account_id` is associated with the member.
 * The `stake` must be at least `REQUIRED_CANDIDACY_STAKE`.
@@ -284,8 +185,8 @@ Any past candidacy and lock is removed, and a new candidacy is created for the g
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name            | Description                                  |
+| --------------- | -------------------------------------------- |
 | `membership_id` | Membership id uniquely identifying the user. |
 
 #### Conditions
@@ -302,10 +203,10 @@ The candidacy and candidacy lock is removed.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `commitment` | The sealed vote representation. |
-| `stake` | Amount of currency user wants to stake for the vote. |
+| Name         | Description                                          |
+| ------------ | ---------------------------------------------------- |
+| `commitment` | The sealed vote representation.                      |
+| `stake`      | Amount of currency user wants to stake for the vote. |
 
 #### Conditions
 
@@ -323,10 +224,10 @@ Any possible vote and corresponding voting lock from a prior election is removed
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `salt` | The salt used to verify the sealed commitment. |
-| `candidate_id` | Member identifier for candidate. |
+| Name           | Description                                    |
+| -------------- | ---------------------------------------------- |
+| `salt`         | The salt used to verify the sealed commitment. |
+| `candidate_id` | Member identifier for candidate.               |
 
 #### Conditions
 
@@ -334,7 +235,7 @@ Any possible vote and corresponding voting lock from a prior election is removed
 * Is signed with some account `staking_account_id` which has vote in the current election cycle.
 * Vote is in **Sealed** stage.
 * `salt`length is not higher than `MAX_SALT_LENGTH`.
-* `candidate_id` \_\_identifies a candidate in the current election.
+* `candidate_id` \__identifies a candidate in the current election.
 * The commitment in the vote is verified to correspond to the provided `salt` and `candidate_id`.
 
 #### Effect
@@ -362,8 +263,8 @@ Voting lock is removed from account and vote is removed.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name           | Description                      |
+| -------------- | -------------------------------- |
 | `candidate_id` | Member identifier for candidate. |
 
 #### Conditions
@@ -380,10 +281,10 @@ Candidate lock is removed from staking account of candidate, and candidate is re
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `membership_id` | Membership identifier. |
-| `note` | Encoded [candidacy note](../key-concepts/encodings.md#candidacy-note) metadata \(subsequent calls will only affect explicitly provided metadata fields\) |
+| Name            | Description                                                                                                                                            |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `membership_id` | Membership identifier.                                                                                                                                 |
+| `note`          | Encoded [candidacy note](../key-concepts/encodings.md#candidacy-note) metadata (subsequent calls will only affect explicitly provided metadata fields) |
 
 #### Conditions
 
@@ -394,4 +295,3 @@ Candidate lock is removed from staking account of candidate, and candidate is re
 #### Effect
 
 The note is associated with a candidate.
-

@@ -10,8 +10,6 @@
 | avatar | uint32 | optional | Member&#39;s avatar - index into external assets array |
 | about | string | optional | Member&#39;s md-formatted about text |
 
-<!-- Working Group Action (set_status_text metadata) -->
-
 ## Working Group Action
 
 **Only one of the fields should be set.**
@@ -88,16 +86,15 @@
 
 ## Working Group Application Metadata
 
-| Field | Type | Label | Description |
-| :--- | :--- | :--- | :--- |
+| Field   | Type   | Label    | Description                                           |
+| ------- | ------ | -------- | ----------------------------------------------------- |
 | answers | string | repeated | List of answers to opening application form questions |
 
 ## Council Candidacy Note
 
-| Field | Type | Label | Description |
-| :--- | :--- | :--- | :--- |
-| header | string | optional | Candidacy header text |
-| bullet\_points | string | repeated | Candidate program in form of bullet points |
-| banner\_image\_uri | string | optional | Image uri of candidate's banner |
-| description | string | optional | Candidacy description \(md-formatted\) |
-
+| Field            | Type   | Label    | Description                                |
+| ---------------- | ------ | -------- | ------------------------------------------ |
+| header           | string | optional | Candidacy header text                      |
+| bullet_points    | string | repeated | Candidate program in form of bullet points |
+| banner_image_uri | string | optional | Image uri of candidate's banner            |
+| description      | string | optional | Candidacy description (md-formatted)       |

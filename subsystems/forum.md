@@ -64,10 +64,7 @@ A post in a thread is defined by the following
 
 ### Editable/Non-Editable
 
-A thread and a post can be either editable or not editable. A non-editable thread/post doesn't take any space in the runtime's storage. When a thread or post is being deleted it just indicates that you no longer want to edit it. To indicate that you want it to be hidden, similar to deletion in a classical forum, you need to set `hidden` to true. The first post in a thread is by default editable as well as any thread at creation.
-To create a thread or an editable post you require an initial deposit for the usage of storage space.
-Non-editable posts doesn't require an initial deposit.
-Furthermore, by deleting a thread/post you can reclaim the initial deposit.
+A thread and a post can be either editable or not editable. A non-editable thread/post doesn't take any space in the runtime's storage. When a thread or post is being deleted it just indicates that you no longer want to edit it. To indicate that you want it to be hidden, similar to deletion in a classical forum, you need to set `hidden` to true. The first post in a thread is by default editable as well as any thread at creation. To create a thread or an editable post you require an initial deposit for the usage of storage space. Non-editable posts doesn't require an initial deposit. Furthermore, by deleting a thread/post you can reclaim the initial deposit.
 
 ### Reaction
 
@@ -77,108 +74,19 @@ A _reaction_ is a signal a member can send to associate a sentiment, in the form
 
 The following constants are hard coded into the system, they can only be updated with a runtime upgrade.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Description</th>
-      <th style="text-align:left">Value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>MAX_SUBCATEGORIES</code>
-      </td>
-      <td style="text-align:left">Maximum allowed subcategories in any
-        <br />category to be created.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MAX_THREADS_IN_CATEGORY</code>
-      </td>
-      <td style="text-align:left">Maximum number of threads in any category for
-        <br />any new thread.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MAX_POSTS_IN_THREAD</code>
-      </td>
-      <td style="text-align:left">
-        <p>Maximum number of posts allowed in any thread for</p>
-        <p>any new post.</p>
-      </td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MAX_MODERATORS_IN_CATEGORY</code>
-      </td>
-      <td style="text-align:left">
-        <p>Maximum number of moderators allowed in a category</p>
-        <p>for any new assignment of the moderator to category.</p>
-      </td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MAX_NUM_CATEGORIES</code>
-      </td>
-      <td style="text-align:left">
-        <p>Maximum number of categories allowed in total for</p>
-        <p>any new category to be created.</p>
-      </td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MAX_POLL_ALTERNATIVES</code>
-      </td>
-      <td style="text-align:left">Upper bound on the number of alternatives in a new poll.</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MAX_CATEGORY_TREE_DEPTH</code>
-      </td>
-      <td style="text-align:left">
-        <p>Maximum category tree depth allowed for any</p>
-        <p>new category to be created.</p>
-      </td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>MAX_NUMBER_OF_WORKERS</code>
-      </td>
-      <td style="text-align:left"></td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>BASE_PAY_OFF_FOR_THREAD_CLEANUP</code>
-      </td>
-      <td style="text-align:left">Base deposit for a thread</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>THREAD_DEPOSIT</code>
-      </td>
-      <td style="text-align:left">Base deposit for creating a thread</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>POST_DEPOSIT</code>
-      </td>
-      <td style="text-align:left">Base deposit for creating a post</td>
-      <td style="text-align:left"><code>fill-in</code>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name                              | Description                                                                                                          | Value     |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------- | --------- |
+| `MAX_SUBCATEGORIES`               | <p>Maximum allowed subcategories in any<br>category to be created.</p>                                               | `fill-in` |
+| `MAX_THREADS_IN_CATEGORY`         | <p>Maximum number of threads in any category for<br>any new thread.</p>                                              | `fill-in` |
+| `MAX_POSTS_IN_THREAD`             | <p>Maximum number of posts allowed in any thread for</p><p>any new post.</p>                                         | `fill-in` |
+| `MAX_MODERATORS_IN_CATEGORY`      | <p>Maximum number of moderators allowed in a category</p><p>for any new assignment of the moderator to category.</p> | `fill-in` |
+| `MAX_NUM_CATEGORIES`              | <p>Maximum number of categories allowed in total for</p><p>any new category to be created.</p>                       | `fill-in` |
+| `MAX_POLL_ALTERNATIVES`           | Upper bound on the number of alternatives in a new poll.                                                             | `fill-in` |
+| `MAX_CATEGORY_TREE_DEPTH`         | <p>Maximum category tree depth allowed for any</p><p>new category to be created.</p>                                 | `fill-in` |
+| `MAX_NUMBER_OF_WORKERS`           |                                                                                                                      | `fill-in` |
+| `BASE_PAY_OFF_FOR_THREAD_CLEANUP` | Base deposit for a thread                                                                                            | `fill-in` |
+| `THREAD_DEPOSIT`                  | Base deposit for creating a thread                                                                                   | `fill-in` |
+| `POST_DEPOSIT`                    | Base deposit for creating a post                                                                                     | `fill-in` |
 
 Notice that a lot of the limits are forward-looking. In the even to of a runtime upgrade, it may be that the limits are changed in a more restrictive direction, in which case it should not be expected that there is a migration that throws out the storage state, instead, the limit should only be understood to have bearing on future actions.
 
@@ -188,16 +96,16 @@ Notice that a lot of the limits are forward-looking. In the even to of a runtime
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `parent` | Optional parent category identifier. |
-| `title` | Title of category. |
-| `description` | Category description. |
+| Name          | Description                          |
+| ------------- | ------------------------------------ |
+| `parent`      | Optional parent category identifier. |
+| `title`       | Title of category.                   |
+| `description` | Category description.                |
 
 #### Conditions
 
 * Signer is working group lead.
-* If provided, `parent` corresponds to valid category. \[Remove: , and it is not directly or indirectly archived.\]
+* If provided, `parent` corresponds to valid category. \[Remove: , and it is not directly or indirectly archived.]
 * Limit `MAX_NUM_CATEGORIES` is respected.
 * Limit `MAX_CATEGORY_TREE_DEPTH` is respected.
 
@@ -209,11 +117,11 @@ A new category is created.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `actor` | Either lead or working group identifier of moderator. |
-| `category_id` | Category identifier. |
-| `new_archival_status` | Whether new status is archived or active. |
+| Name                  | Description                                           |
+| --------------------- | ----------------------------------------------------- |
+| `actor`               | Either lead or working group identifier of moderator. |
+| `category_id`         | Category identifier.                                  |
+| `new_archival_status` | Whether new status is archived or active.             |
 
 #### Conditions
 
@@ -230,11 +138,11 @@ Archival status of category corresponding to `category_id` is updated to `new_ar
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `actor` | Either lead or working group identifier of moderator. |
-| `category_id` | Category identifier. |
-| `new_title` | New title for category. |
+| Name          | Description                                           |
+| ------------- | ----------------------------------------------------- |
+| `actor`       | Either lead or working group identifier of moderator. |
+| `category_id` | Category identifier.                                  |
+| `new_title`   | New title for category.                               |
 
 #### Conditions
 
@@ -250,11 +158,11 @@ The title of the category corresponding to `category_id` is set to `new_title`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `actor` | Either lead or working group identifier of moderator. |
-| `category_id` | Category identifier. |
-| `new_description` | New description for category. |
+| Name              | Description                                           |
+| ----------------- | ----------------------------------------------------- |
+| `actor`           | Either lead or working group identifier of moderator. |
+| `category_id`     | Category identifier.                                  |
+| `new_description` | New description for category.                         |
 
 #### Conditions
 
@@ -270,11 +178,11 @@ The description of the category corresponding to `category_id` is set to `new_de
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `actor` | Either lead or working group identifier of moderator. |
-| `category_id` | Category identifier. |
-| `threads` | List of thread identifiers. |
+| Name          | Description                                           |
+| ------------- | ----------------------------------------------------- |
+| `actor`       | Either lead or working group identifier of moderator. |
+| `category_id` | Category identifier.                                  |
+| `threads`     | List of thread identifiers.                           |
 
 #### Conditions
 
@@ -291,11 +199,11 @@ The stickied threads of the category corresponding to `category_id` is set to `t
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `category_id` | Category identifier. |
-| `moderator` | Working group identifier of moderator. |
-| `is_member` | Whether moderator should be member. |
+| Name          | Description                            |
+| ------------- | -------------------------------------- |
+| `category_id` | Category identifier.                   |
+| `moderator`   | Working group identifier of moderator. |
+| `is_member`   | Whether moderator should be member.    |
 
 #### Conditions
 
@@ -312,10 +220,10 @@ If `is_member` is true, then the `moderator` identifier is added to the category
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `actor` | Either lead or working group identifier of moderator. |
-| `category_id` | Category identifier. |
+| Name          | Description                                           |
+| ------------- | ----------------------------------------------------- |
+| `actor`       | Either lead or working group identifier of moderator. |
+| `category_id` | Category identifier.                                  |
 
 #### Conditions
 
@@ -333,13 +241,13 @@ The category is dropped.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `member_id` | Identifier of member. |
-| `category_id` | Category identifier. |
-| `title` | Thread title. |
-| `text` | Body text of thread. |
-| `poll` | Optional poll information for thread. |
+| Name          | Description                           |
+| ------------- | ------------------------------------- |
+| `member_id`   | Identifier of member.                 |
+| `category_id` | Category identifier.                  |
+| `title`       | Thread title.                         |
+| `text`        | Body text of thread.                  |
+| `poll`        | Optional poll information for thread. |
 
 #### Conditions
 
@@ -363,12 +271,12 @@ The category is dropped.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `member_id` | Member identifier. |
+| Name          | Description          |
+| ------------- | -------------------- |
+| `member_id`   | Member identifier.   |
 | `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `new_title` | Thread title. |
+| `thread_id`   | Thread identifier.   |
+| `new_title`   | Thread title.        |
 
 #### Conditions
 
@@ -377,8 +285,8 @@ The category is dropped.
 * `thread_id` corresponds to an existing thread.
 * `member_id` corresponds to the author of the thread.
 * The thread is not deleted from storage.
-* The category is not archived. \[WIP\]
-* The thread is not archived. \[WIP\]
+* The category is not archived. \[WIP]
+* The thread is not archived. \[WIP]
 
 #### Effect
 
@@ -388,12 +296,12 @@ The title of the thread is set to `new_title`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `actor` | Either lead or working group identifier of moderator. |
-| `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `new_category_id` | Category identifier. |
+| Name              | Description                                           |
+| ----------------- | ----------------------------------------------------- |
+| `actor`           | Either lead or working group identifier of moderator. |
+| `category_id`     | Category identifier.                                  |
+| `thread_id`       | Thread identifier.                                    |
+| `new_category_id` | Category identifier.                                  |
 
 #### Conditions
 
@@ -404,7 +312,7 @@ The title of the thread is set to `new_title`.
 * `thread_id` corresponds to an existing thread that's not deleted from storage.
 * If signer is moderator, then this moderator must be assigned have control of the category corresponding to `category_id`.
 * If signer is moderator, then this moderator must be assigned have control of the category corresponding to `new_category_id`.
-* Limit `MAX_THREADS_IN_CATEGORY` is respected for category corresponding to `new_category_id`. \[WIP\]
+* Limit `MAX_THREADS_IN_CATEGORY` is respected for category corresponding to `new_category_id`. \[WIP]
 
 #### Effect
 
@@ -414,13 +322,13 @@ The thread has relocated to category corresponding to `new_category_id`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `forum_member_id` | Forum member identifier. |
-| `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `rationale` | Human-readable text. |
-| `hidden` | Indicates whether the thread should be hidden or just removed from storage. |
+| Name              | Description                                                                 |
+| ----------------- | --------------------------------------------------------------------------- |
+| `forum_member_id` | Forum member identifier.                                                    |
+| `category_id`     | Category identifier.                                                        |
+| `thread_id`       | Thread identifier.                                                          |
+| `rationale`       | Human-readable text.                                                        |
+| `hidden`          | Indicates whether the thread should be hidden or just removed from storage. |
 
 #### Conditions
 
@@ -438,12 +346,12 @@ The thread has relocated to category corresponding to `new_category_id`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `actor` | Either member identifier, lead or working group identifier of moderator. |
-| `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `rationale` | Human-readable text. |
+| Name          | Description                                                              |
+| ------------- | ------------------------------------------------------------------------ |
+| `actor`       | Either member identifier, lead or working group identifier of moderator. |
+| `category_id` | Category identifier.                                                     |
+| `thread_id`   | Thread identifier.                                                       |
+| `rationale`   | Human-readable text.                                                     |
 
 #### Conditions
 
@@ -461,13 +369,13 @@ The thread has relocated to category corresponding to `new_category_id`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `member_id` | Member identifier. |
-| `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `text` | Human-readable text. |
-| `editable` | Whether or not the post is editable. |
+| Name          | Description                          |
+| ------------- | ------------------------------------ |
+| `member_id`   | Member identifier.                   |
+| `category_id` | Category identifier.                 |
+| `thread_id`   | Thread identifier.                   |
+| `text`        | Human-readable text.                 |
+| `editable`    | Whether or not the post is editable. |
 
 #### Conditions
 
@@ -487,13 +395,13 @@ The thread has relocated to category corresponding to `new_category_id`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `member_id` | Member identifier. |
+| Name          | Description          |
+| ------------- | -------------------- |
+| `member_id`   | Member identifier.   |
 | `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `post_id` | Post identifier. |
-| `new_text` | Human-readable text. |
+| `thread_id`   | Thread identifier.   |
+| `post_id`     | Post identifier.     |
+| `new_text`    | Human-readable text. |
 
 #### Conditions
 
@@ -513,13 +421,13 @@ Post text is set to `new_text`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `member_id` | Member identifier. |
-| `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `post_id` | Post identifier. |
-| `reaction_value` | Reaction value. |
+| Name             | Description          |
+| ---------------- | -------------------- |
+| `member_id`      | Member identifier.   |
+| `category_id`    | Category identifier. |
+| `thread_id`      | Thread identifier.   |
+| `post_id`        | Post identifier.     |
+| `reaction_value` | Reaction value.      |
 
 #### Conditions
 
@@ -538,13 +446,13 @@ Reaction with value `reaction_value`is accepted.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `forum_user_id` | Member identifier. |
-| `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `post_id` | Post identifier. |
-| `hidden` | Whether post should be also be hidden. |
+| Name            | Description                            |
+| --------------- | -------------------------------------- |
+| `forum_user_id` | Member identifier.                     |
+| `category_id`   | Category identifier.                   |
+| `thread_id`     | Thread identifier.                     |
+| `post_id`       | Post identifier.                       |
+| `hidden`        | Whether post should be also be hidden. |
 
 #### Conditions
 
@@ -554,8 +462,8 @@ Reaction with value `reaction_value`is accepted.
 * `post_id` corresponds to an existing post.
 * post is not first post in thread.
 * `forum_user_id` is member of forum and is either
-    * Post author
-    * Or Post's thread has been deleted and `PostLifeTime` has happened since post's `last_edited`
+  * Post author
+  * Or Post's thread has been deleted and `PostLifeTime` has happened since post's `last_edited`
 * If `forum_user_id` is not author `hidden` must be false.
 
 #### Effect
@@ -567,13 +475,13 @@ Reaction with value `reaction_value`is accepted.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `actor` | lead or working group identifier of moderator. |
-| `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
-| `post_id` | Post identifier. |
-| `reaction_value` | Reaction value. |
+| Name             | Description                                    |
+| ---------------- | ---------------------------------------------- |
+| `actor`          | lead or working group identifier of moderator. |
+| `category_id`    | Category identifier.                           |
+| `thread_id`      | Thread identifier.                             |
+| `post_id`        | Post identifier.                               |
+| `reaction_value` | Reaction value.                                |
 
 #### Conditions
 
@@ -592,11 +500,11 @@ Reaction with value `reaction_value`is accepted.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `member_id` | Member identifier. |
-| `category_id` | Category identifier. |
-| `thread_id` | Thread identifier. |
+| Name                | Description                  |
+| ------------------- | ---------------------------- |
+| `member_id`         | Member identifier.           |
+| `category_id`       | Category identifier.         |
+| `thread_id`         | Thread identifier.           |
 | `alternative_index` | Index of a poll alternative. |
 
 #### Conditions
@@ -615,4 +523,3 @@ The member is registered as having voted for alternative `aleternative_index`
 ## Examples
 
 **WIP**
-

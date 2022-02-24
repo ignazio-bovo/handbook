@@ -47,10 +47,10 @@ A reply can be deleted by anyone after `ReplyLifetime` passed since the reply wa
 
 The following constants are hard coded into the system, they can only be updated with a runtime upgrade.
 
-| Name | Description | Value |
-| :--- | :--- | :--- |
-| `REPLY_DEPOSIT` | Required deposit to create a reply. | `fill-in` |
-| `REPLY_LIFETIME` | Number of blocks until a reply  can be deleted by anyone | `fill-in` |
+| Name             | Description                                                        | Value     |
+| ---------------- | ------------------------------------------------------------------ | --------- |
+| `REPLY_DEPOSIT`  | Required deposit to create a reply.                                | `fill-in` |
+| `REPLY_LIFETIME` | <p>Number of blocks until a reply<br> can be deleted by anyone</p> | `fill-in` |
 
 ## Extrinsics
 
@@ -58,13 +58,13 @@ The following constants are hard coded into the system, they can only be updated
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `participant_id` | Member id of the reply creator. |
-| `post_id` | Parent post id. |
-| `reply_id` | Parent reply id if any. |
-| `text` | Text of the reply. |
-| `editable` | Whether the Reply is editable or not. |
+| Name             | Description                           |
+| ---------------- | ------------------------------------- |
+| `participant_id` | Member id of the reply creator.       |
+| `post_id`        | Parent post id.                       |
+| `reply_id`       | Parent reply id if any.               |
+| `text`           | Text of the reply.                    |
+| `editable`       | Whether the Reply is editable or not. |
 
 #### Conditions
 
@@ -83,18 +83,18 @@ The following constants are hard coded into the system, they can only be updated
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `participant_id` | Member id of the caller. |
-| `post_id` | Parent post id. |
-| `reply_id` | Reply id of the edited reply. |
-| `new_text` | New text of the reply. |
+| Name             | Description                   |
+| ---------------- | ----------------------------- |
+| `participant_id` | Member id of the caller.      |
+| `post_id`        | Parent post id.               |
+| `reply_id`       | Reply id of the edited reply. |
+| `new_text`       | New text of the reply.        |
 
 #### Conditions
 
 * Signer's account corresponds to participant.
 * Post with `post_id` exists and is unlocked.
-* `reply_id` exists in storage\(has been created as editable and has not been erased\).
+* `reply_id` exists in storage(has been created as editable and has not been erased).
 * `participant` is Reply's owner.
 
 #### Effect
@@ -106,18 +106,18 @@ The following constants are hard coded into the system, they can only be updated
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `participant_id` | Member id of the caller. |
-| `post_id` | Parent post id. |
-| `reply_id` | Reply id of the edited reply. |
-| `hide` | Whether to hide the deleted reply. |
+| Name             | Description                        |
+| ---------------- | ---------------------------------- |
+| `participant_id` | Member id of the caller.           |
+| `post_id`        | Parent post id.                    |
+| `reply_id`       | Reply id of the edited reply.      |
+| `hide`           | Whether to hide the deleted reply. |
 
 #### Conditions
 
 * Signer's account corresponds to participant.
 * Post with `post_id` exists and is unlocked.
-* `reply_id` exists in storage\(has been created as editable and has not been erased\).
+* `reply_id` exists in storage(has been created as editable and has not been erased).
 * `participant` is Reply's owner or `REPLY_LIFETME` has gone by since Reply `last_edited`.
 
 #### Effect
@@ -128,4 +128,3 @@ The following constants are hard coded into the system, they can only be updated
 ## Examples
 
 **WIP**
-

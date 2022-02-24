@@ -14,7 +14,7 @@ A working group is an organizational body, subject to the oversight of the counc
 
 The relevant roles in a working group are
 
-* **Applicant:** A member who has submitted an application to join an opening for a worker role in the working group. A given member may apply more than once to a given opening, and also if they already occupy the role as worker the same group. Openings are created by the lead \(see below\), or by the council when wanting to fill the lead role.
+* **Applicant:** A member who has submitted an application to join an opening for a worker role in the working group. A given member may apply more than once to a given opening, and also if they already occupy the role as worker the same group. Openings are created by the lead (see below), or by the council when wanting to fill the lead role.
 * **Worker:** A member who has, through an application, entered the working group.The worker may or may not be staked, and is receiving payouts to a designated account at regular intervals. The worker role gives some ability to act in a domain specific way within the given subsystem. So for example in the context of the forum, a worker in the forum working group can be assigned to be a moderator in certain forum categories, and have associated moderation privileges. Lastly, a member may act as multiple works simultaneously, or over time, in the same working group.
 * **Lead:** A designated worker who is responsible for hiring and managing the other workers, as well as allocating funds from a budget towards purposes that support the success of the subsystem. Also the leader could set the general working group status, like: 
   * a one line status message on the subsystem,
@@ -34,10 +34,9 @@ A has the following information associated
 * **Staking profile:**
   * **Staking account:** Holds the stake currently associated with the role. .
   * **Leaving unstaking period:** The number of blocks required from a worker initiating leaving the group until their staked funds are unlocked.
-* **Reward account**: The destination account to which periodic rewards are paid out.
+*   **Reward account**: The destination account to which periodic rewards are paid out.
 
-  All roles have the following information associated.
-
+    All roles have the following information associated.
 * **Reward rate per block:** The number of tokens the worker earns per block, although payouts do not occur per block, but every `REWARD_PAYOUT_PERIOD` blocks. This is earned for every block from being hired to being terminated, or initiating leaving the group. It is not earned during unstaking.
 * **Owed reward:** The total reward this worker was not paid over a number of payout periods where there was not sufficient funds in the working group budget.
 * **Unstaking status:** Is either _normal_, or _unstaking_. The initial status is the former, and the latter is only entered into when the worker attempts to leave.
@@ -52,7 +51,7 @@ The budget is the root resource pool for all token minting in the working group,
 
 ### Rewards
 
-All workers are paid every `REWARD_PAYOUT_PERIOD` blocks, and each worker is to be credited according to their own reward rate, and any possibly outstanding owed reward. During this payout, where workers are processed in some consistent order \(for a given set of workers\), the crediting only occurs while the budget is respected. Also, workers unstaking are ignored. For each payout, the budget is tightened. If a worker cannot be paid out in full, then the difference is added to their owed reward. The budget will then have to be reset by the council. When a worker is terminated, or leaves, any owed reward and outstanding reward from the last payout, are attempted paid out, however if the budget does not allow it, then the worker suffers the loss.
+All workers are paid every `REWARD_PAYOUT_PERIOD` blocks, and each worker is to be credited according to their own reward rate, and any possibly outstanding owed reward. During this payout, where workers are processed in some consistent order (for a given set of workers), the crediting only occurs while the budget is respected. Also, workers unstaking are ignored. For each payout, the budget is tightened. If a worker cannot be paid out in full, then the difference is added to their owed reward. The budget will then have to be reset by the council. When a worker is terminated, or leaves, any owed reward and outstanding reward from the last payout, are attempted paid out, however if the budget does not allow it, then the worker suffers the loss.
 
 ### Spending
 
@@ -60,7 +59,7 @@ In addition to rewards, the lead can spend from this budget for arbitrary purpos
 
 ### Staking
 
-Worker roles require staking in order to apply and remain in the role. Staking for worker roles is done using a designated working group lock on a single account per worker role. The amount required is set by the discretion of the lead. The staking requirement could be decreased by the lead \(or by the council for leaders\). The worker is able to increase their own stake, for example, in response for leader demand. Consult the [Staking](../key-concepts/staking.md#reuse) article to see a list of other staking purposes, and corresponding locks, which can be combined with staking for a given working group.
+Worker roles require staking in order to apply and remain in the role. Staking for worker roles is done using a designated working group lock on a single account per worker role. The amount required is set by the discretion of the lead. The staking requirement could be decreased by the lead (or by the council for leaders). The worker is able to increase their own stake, for example, in response for leader demand. Consult the [Staking](../key-concepts/staking.md#reuse) article to see a list of other staking purposes, and corresponding locks, which can be combined with staking for a given working group.
 
 #### Staking Policy
 
@@ -111,13 +110,13 @@ Those signals are processed by _Query nodes_, which update the status in the dat
 
 Hard-coded values are defined _for each working group_, and they can only be altered with a runtime upgrade.
 
-| Name | Description |
-| :--- | :--- |
-| `MAX_NUMBER_OF_WORKERS` | The maximum number of workers that can be part of the working group simultaneously. |
-| `REWARD_PAYOUT_PERIOD` | The number of blocks between each time workers are paid their total reward for the period. |
-| `LOCK_ID` | The Id for the lock used to stake in this working group. |
-| `MIN_UNSTAKING_PERIOD_LIMIT` | Minimum unstaking period in this working group. |
-| `MINIMUM_STAKE_FOR_OPENING` | Minimum stake required for any opening. |
+| Name                         | Description                                                                                |
+| ---------------------------- | ------------------------------------------------------------------------------------------ |
+| `MAX_NUMBER_OF_WORKERS`      | The maximum number of workers that can be part of the working group simultaneously.        |
+| `REWARD_PAYOUT_PERIOD`       | The number of blocks between each time workers are paid their total reward for the period. |
+| `LOCK_ID`                    | The Id for the lock used to stake in this working group.                                   |
+| `MIN_UNSTAKING_PERIOD_LIMIT` | Minimum unstaking period in this working group.                                            |
+| `MINIMUM_STAKE_FOR_OPENING`  | Minimum stake required for any opening.                                                    |
 
 ## Extrinsics
 
@@ -173,8 +172,8 @@ A new application is created for the opening, using the provided information, an
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name             | Description                                 |
+| ---------------- | ------------------------------------------- |
 | `application_id` | Identifier for application to be withdrawn. |
 
 #### Conditions
@@ -190,10 +189,10 @@ The staking is removed by removing the lock on the staking account. The applicat
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `opening_id` | Identifier of opening. |
-| `winners` | Set of application identifiers of winners. |
+| Name         | Description                                |
+| ------------ | ------------------------------------------ |
+| `opening_id` | Identifier of opening.                     |
+| `winners`    | Set of application identifiers of winners. |
 
 #### Conditions
 
@@ -214,8 +213,8 @@ NB: Notice that all losing applications are still around in order to allow recov
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name         | Description            |
+| ------------ | ---------------------- |
 | `opening_id` | Identifier of opening. |
 
 #### Conditions
@@ -235,9 +234,9 @@ NB: Notice that all applications are still around in order to allow recovering s
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `worker_id` | Worker identifier. |
+| Name           | Description                 |
+| -------------- | --------------------------- |
+| `worker_id`    | Worker identifier.          |
 | `role_account` | New role account of worker. |
 
 #### Conditions
@@ -253,9 +252,9 @@ Worker role account is updated to `role_account`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `worker_id` | Worker identifier. |
+| Name             | Description                   |
+| ---------------- | ----------------------------- |
+| `worker_id`      | Worker identifier.            |
 | `reward_account` | New reward account of worker. |
 
 #### Conditions
@@ -271,9 +270,9 @@ Worker reward account is updated to `reward_account`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `worker_id` | Worker identifier. |
+| Name               | Description                           |
+| ------------------ | ------------------------------------- |
+| `worker_id`        | Worker identifier.                    |
 | `reward_per_block` | New reward rate per block for worker. |
 
 #### Conditions
@@ -290,9 +289,9 @@ Worker reward rate per block is set to `reward_per_block`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `worker_id` | Worker identifier. |
+| Name        | Description          |
+| ----------- | -------------------- |
+| `worker_id` | Worker identifier.   |
 | `rationale` | Human readable text. |
 
 #### Conditions
@@ -310,11 +309,11 @@ Worker reward rate per block is set to `reward_per_block`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `member_id` | Member identifier. |
+| Name              | Description                    |
+| ----------------- | ------------------------------ |
+| `member_id`       | Member identifier.             |
 | `slashing_amount` | Optional amount to be slashed. |
-| `rationale` | Human readable text. |
+| `rationale`       | Human readable text.           |
 
 #### Conditions
 
@@ -335,11 +334,11 @@ Worker reward rate per block is set to `reward_per_block`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `worker_id` | Worker identifier. |
+| Name              | Description           |
+| ----------------- | --------------------- |
+| `worker_id`       | Worker identifier.    |
 | `slashing_amount` | Amount to be slashed. |
-| `rationale` | Human readable text. |
+| `rationale`       | Human readable text.  |
 
 #### Conditions
 
@@ -357,9 +356,9 @@ The staking account is slashed by `slashing_amount`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `worker_id` | Worker identifier. |
+| Name           | Description                           |
+| -------------- | ------------------------------------- |
+| `worker_id`    | Worker identifier.                    |
 | `stake_amount` | Amount to decrease staked balance by. |
 
 #### Conditions
@@ -378,9 +377,9 @@ Staking lock is reduced by `slashing_amount`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `worker_id` | Worker identifier. |
+| Name           | Description                           |
+| -------------- | ------------------------------------- |
+| `worker_id`    | Worker identifier.                    |
 | `stake_amount` | Amount to increase staked balance by. |
 
 #### Conditions
@@ -398,11 +397,11 @@ Staking lock is increased by `stake_amount`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name         | Description                |
+| ------------ | -------------------------- |
 | `account_id` | Account to get the tokens. |
-| `amount` | Transfer amount. |
-| `rationale` | Spending rationale. |
+| `amount`     | Transfer amount.           |
+| `rationale`  | Spending rationale.        |
 
 #### Conditions
 
@@ -431,4 +430,3 @@ Account balance is increased by `amount`, and `budget` is reduced correspondingl
 #### Effect
 
 Assuming the encoded action metadata is valid – the signalled action should be executed by _Query nodes_ (see: [Status](#status))
-

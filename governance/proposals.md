@@ -45,84 +45,16 @@ A proposal type is a parametrized intention to have some effect on the platform.
 
 All proposal types have constant values for a shared set of parameters that are common across all types, thee are called _proposal constants._ The name and semantics of each constant is listed in the table below.
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left"><b>Name</b>
-      </th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><code>DECIDING_PERIOD</code>
-      </td>
-      <td style="text-align:left">
-        <p>Maximum number of blocks for deciding period.</p>
-        <p>Integer no less than 1.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>GRACING_LIMIT</code>
-      </td>
-      <td style="text-align:left">
-        <p>Minimum number of blocks that must pass after a
-          <br />proposal is approved until it has its intended effect.</p>
-        <p>Integer no less than 0.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>APPROVAL_QUORUM</code>
-      </td>
-      <td style="text-align:left">
-        <p>Number of votes cast below which the proposal cannot be approved.</p>
-        <p>Integer no less than 1.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>APPROVAL_THRESHOLD</code>
-      </td>
-      <td style="text-align:left">
-        <p>Minimum percentage of approval votes as a share of
-          <br />all cast votes that result in approval.</p>
-        <p>Integer in [0, 100].</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>SLASHING_QUORUM</code>
-      </td>
-      <td style="text-align:left">
-        <p>Number of votes cast below which the proposal
-          <br />cannot be slashed.</p>
-        <p>Integer no less than 1.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>SLASHING_THRESHOLD</code>
-      </td>
-      <td style="text-align:left">
-        <p>Minimum percentage of cast votes as share that slash relative
-          <br />to those that vote approve, abstain or reject.</p>
-        <p>Integer in [0, 100].</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>STAKE</code>
-      </td>
-      <td style="text-align:left">
-        <p>Exact stake required to create a proposal of this type.</p>
-        <p>Integer no less than 0.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>CONSTITUTIONALITY</code>
-      </td>
-      <td style="text-align:left">The number of councils in that must approve the proposal
-        <br />in a row before it has its intended effect.
-        <br />Integer no less than 1.</td>
-    </tr>
-  </tbody>
-</table>
+| **Name**             | Description                                                                                                                                       |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DECIDING_PERIOD`    | <p>Maximum number of blocks for deciding period.</p><p>Integer no less than 1.</p>                                                                |
+| `GRACING_LIMIT`      | <p>Minimum number of blocks that must pass after a<br>proposal is approved until it has its intended effect.</p><p>Integer no less than 0.</p>    |
+| `APPROVAL_QUORUM`    | <p>Number of votes cast below which the proposal cannot be approved.</p><p>Integer no less than 1.</p>                                            |
+| `APPROVAL_THRESHOLD` | <p>Minimum percentage of approval votes as a share of<br>all cast votes that result in approval.</p><p>Integer in [0, 100].</p>                   |
+| `SLASHING_QUORUM`    | <p>Number of votes cast below which the proposal<br>cannot be slashed.</p><p>Integer no less than 1.</p>                                          |
+| `SLASHING_THRESHOLD` | <p>Minimum percentage of cast votes as share that slash relative<br>to those that vote approve, abstain or reject.</p><p>Integer in [0, 100].</p> |
+| `STAKE`              | <p>Exact stake required to create a proposal of this type.</p><p>Integer no less than 0.</p>                                                      |
+| `CONSTITUTIONALITY`  | <p>The number of councils in that must approve the proposal<br>in a row before it has its intended effect.<br>Integer no less than 1.</p>         |
 
 #### Parameters: General & Specific
 
@@ -138,7 +70,7 @@ The type-specific parameters for each proposal type are listed with the proposal
 
 #### Creation Conditions
 
-When a proposal is submitted, a set of conditions on the values of the input parameters \(only\) are evaluated, these are called _creation conditions_, and creating the proposal fails if they are not satisfied. These are things like for example respecting the upper bound on the amount of money you are asking for in a spending proposal. Importantly, these checks are _pure_, they only depend on parameters, not the state of the system.
+When a proposal is submitted, a set of conditions on the values of the input parameters (only) are evaluated, these are called _creation conditions_, and creating the proposal fails if they are not satisfied. These are things like for example respecting the upper bound on the amount of money you are asking for in a spending proposal. Importantly, these checks are _pure_, they only depend on parameters, not the state of the system.
 
 #### Execution Conditions
 
@@ -162,15 +94,15 @@ A proposal is defined by the following information
 
 Below is a list of the stages a proposal can be in, and what each of them mean:
 
-* **Deciding:** Initial stage for all successfully created proposals. This is the only stage where votes submitted can actually impact the outcome. If a new council is elected, any present stake is slashed by `REJECTION_FEE` , the staking lock is removed and the proposal transitions to the rejected stage.
+*   **Deciding:** Initial stage for all successfully created proposals. This is the only stage where votes submitted can actually impact the outcome. If a new council is elected, any present stake is slashed by `REJECTION_FEE` , the staking lock is removed and the proposal transitions to the rejected stage.
 
-  When a vote is submitted it is evaluated as such:
+    When a vote is submitted it is evaluated as such:
 
-  1. If `APPROVAL_QUORUM` and `APPROVAL_THRESHOLD` are satisfied, then increment council approvals counter. If counter now is `CONSTITUTIONALITY` then remove staking lock and transition to gracing stage, otherwise transition to dormant stage.
-  2. If `SLASHING_QUORUM` and `SLASHING_THRESHOLD` are satisfied, but point \(1\) is not, then slash full stake, remove the lock and transition to the rejected stage.
-  3. If points \(1\) and \(2\) are not and cannot be satisfied by any future a outstanding votes, then slash stake by up to `REJECTION_FEE`, remove lock and transition to rejected stage.
+    1. If `APPROVAL_QUORUM` and `APPROVAL_THRESHOLD` are satisfied, then increment council approvals counter. If counter now is `CONSTITUTIONALITY` then remove staking lock and transition to gracing stage, otherwise transition to dormant stage.
+    2. If `SLASHING_QUORUM` and `SLASHING_THRESHOLD` are satisfied, but point (1) is not, then slash full stake, remove the lock and transition to the rejected stage.
+    3. If points (1) and (2) are not and cannot be satisfied by any future a outstanding votes, then slash stake by up to `REJECTION_FEE`, remove lock and transition to rejected stage.
 
-If `DECIDING_PERIOD` blocks pass while still in this stage, apply checks \(1-3\) with same transition and side-effect rules as above.
+If `DECIDING_PERIOD` blocks pass while still in this stage, apply checks (1-3) with same transition and side-effect rules as above.
 
 * **Dormant:** Was approved by current council, but requires further approvals to satisfy `CONSTITUTIONALITY` requirement. Transitions to deciding stage when next council is elected.
 * **Gracing:** Is awaiting execution for until trigger block, or `GRACING_LIMIT` blocks since start of period if no trigger was provided. When this duration is over, the execution conditions are checked, if they are satisfied the proposal transitions to the execution succeeded stage, if they are not, it transitions to the execution failed stage.
@@ -186,7 +118,7 @@ Before mainnet, an extra transition rule is worth bearing in mind is that, for a
 
 The stages and transitions, excluding SUDO dynamics, are summarized in the image below.
 
-![Proposal life-cycle stages.](../.gitbook/assets/proposal_3.png)
+![Proposal life-cycle stages.](../.gitbook/assets/proposal\_3.png)
 
 ### Staking
 
@@ -194,7 +126,7 @@ As described, proposals may require staking to be submitted. A single account mu
 
 ### Discussion
 
-A single threaded discussion is opened for each successfully created discussion. A thread can be in two _discussion modes_, open or closed. In open mode, any member can post a message, while in closed mode, only the active council, the original proposer, or one among a set of whitelisted members can post. Mode can be changed by member or council member at any time, and default mode is open. Both council members and proposer can curate whitelist by adding and removing members. A poster can edit a post an unlimited number of times, but only if they have access. A thread can no longer be updated in any way \(mode, posting, edits, etc.\) when `DISCUSSION_LINGERING_DURATION` have passed since being rejected or executed. Lastly, at most `MAX_POSTS_PER_THREAD` can be posted in a single thread.
+A single threaded discussion is opened for each successfully created discussion. A thread can be in two _discussion modes_, open or closed. In open mode, any member can post a message, while in closed mode, only the active council, the original proposer, or one among a set of whitelisted members can post. Mode can be changed by member or council member at any time, and default mode is open. Both council members and proposer can curate whitelist by adding and removing members. A poster can edit a post an unlimited number of times, but only if they have access. A thread can no longer be updated in any way (mode, posting, edits, etc.) when `DISCUSSION_LINGERING_DURATION` have passed since being rejected or executed. Lastly, at most `MAX_POSTS_PER_THREAD` can be posted in a single thread.
 
 ## Proposals
 
@@ -204,24 +136,24 @@ This section includes proposals that concern the platform as whole in terms inte
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name     | Description                               |
+| -------- | ----------------------------------------- |
 | `signal` | The actual human readable signaling text. |
 
 Note that the distinction between `signal` and the rationale parameter is that the rationale is the _why_ and this is the _what._
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -239,22 +171,22 @@ None.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name               | Description                                  |
+| ------------------ | -------------------------------------------- |
 | `new_constitution` | The actual human readable constitution text. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -272,23 +204,23 @@ None.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `amounts` | The amount of tokens requested to each account. |
-| `accounts` | Recipients of funds. |
+| Name       | Description                                     |
+| ---------- | ----------------------------------------------- |
+| `amounts`  | The amount of tokens requested to each account. |
+| `accounts` | Recipients of funds.                            |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -309,22 +241,22 @@ None.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name   | Description                                               |
+| ------ | --------------------------------------------------------- |
 | `blob` | The raw WebAssembly object to be used as the new runtime. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -342,25 +274,25 @@ The block after this proposal is executed will follow the rules of the runtime c
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `group` | Identifier for working group. |
-| `description` | Human readable description of opening. |
-| `stake_policy` | Optional staking policy. |
-| `per_block_reward_amount` | Block denominated reward. |
+| Name                      | Description                            |
+| ------------------------- | -------------------------------------- |
+| `group`                   | Identifier for working group.          |
+| `description`             | Human readable description of opening. |
+| `stake_policy`            | Optional staking policy.               |
+| `per_block_reward_amount` | Block denominated reward.              |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -378,23 +310,23 @@ Same as when creating an opening for workers in the given group with given input
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `group` | Identifier for working group. |
+| Name         | Description                      |
+| ------------ | -------------------------------- |
+| `group`      | Identifier for working group.    |
 | `opening_id` | Identifier for opening in group. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -412,24 +344,24 @@ Same as when cancelling an opening for workers in the given group with given inp
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `group` | Identifier for working group. |
-| `opening_id` | Identifier for opening in group. |
+| Name             | Description                          |
+| ---------------- | ------------------------------------ |
+| `group`          | Identifier for working group.        |
+| `opening_id`     | Identifier for opening in group.     |
 | `application_id` | Identifier for successful applicant. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -447,24 +379,24 @@ Same as when filling opening in group for worker with given inputs, except `appl
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `group` | Identifier for working group. |
-| `worker_id` | Worker identifier. |
-| `slashing_amount` | Amount to be slashed. |
+| Name              | Description                   |
+| ----------------- | ----------------------------- |
+| `group`           | Identifier for working group. |
+| `worker_id`       | Worker identifier.            |
+| `slashing_amount` | Amount to be slashed.         |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -485,24 +417,24 @@ Same as when slashing a worker in group with given inputs.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `group` | Identifier for working group. |
-| `worker_id` | Worker identifier. |
+| Name              | Description                    |
+| ----------------- | ------------------------------ |
+| `group`           | Identifier for working group.  |
+| `worker_id`       | Worker identifier.             |
 | `slashing_amount` | Optional amount to be slashed. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -520,24 +452,24 @@ Same as when terminating a worker in group with given inputs, and removing lead 
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `group` | Identifier for working group. |
-| `worker_id` | Worker identifier. |
+| Name               | Description                           |
+| ------------------ | ------------------------------------- |
+| `group`            | Identifier for working group.         |
+| `worker_id`        | Worker identifier.                    |
 | `reward_per_block` | New reward rate per block for worker. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -555,24 +487,24 @@ Same as when updating reward of a worker in group with given inputs.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `group` | Identifier for working group. |
-| `worker_id` | Worker identifier. |
+| Name           | Description                        |
+| -------------- | ---------------------------------- |
+| `group`        | Identifier for working group.      |
+| `worker_id`    | Worker identifier.                 |
 | `stake_amount` | Amount by which to decrease stake. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -590,23 +522,23 @@ Same as when decreasing worker stake in group with given inputs.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
-| `group` | Identifier for working group. |
+| Name            | Description                     |
+| --------------- | ------------------------------- |
+| `group`         | Identifier for working group.   |
 | `budget_update` | Signed amount change in budget. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -624,22 +556,22 @@ If `budget_update` is non-negative, then this amount is reduced from the council
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name                  | Description              |
+| --------------------- | ------------------------ |
 | `new_validator_count` | New max validator count. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -657,22 +589,22 @@ Same as `set_validator_count` in `pallet_staking` module with given input.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name                   | Description           |
+| ---------------------- | --------------------- |
 | `new_membership_price` | New membership price. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -690,22 +622,22 @@ The membership price is set to `new_membership_price`.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name               | Description                  |
+| ------------------ | ---------------------------- |
 | `new_referral_cut` | New referral cut percentage. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -723,22 +655,22 @@ The referral cut is set to `new_referral_cut`.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name                       | Description                    |
+| -------------------------- | ------------------------------ |
 | `new_default_invite_count` | New default invitations count. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -756,22 +688,22 @@ The default invitations count is set to `new_default_invite_count`.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name                          | Description                  |
+| ----------------------------- | ---------------------------- |
 | `new_invited_initial_balance` | New invited initial balance. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -789,22 +721,22 @@ The new invited initial balance is set to `new_invited_initial_balance`.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name               | Description           |
+| ------------------ | --------------------- |
 | `new_invite_count` | New invitation count. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -822,22 +754,22 @@ The invitation quota of member is set to `new_invite_count`.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name                   | Description                   |
+| ---------------------- | ----------------------------- |
 | `new_budget_increment` | New council budget increment. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -855,22 +787,22 @@ The budget increment is set to `new_budget_increment`.
 
 #### Parameters
 
-| Name | Description |
-| :--- | :--- |
+| Name                   | Description           |
+| ---------------------- | --------------------- |
 | `new_councilor_reward` | New councilor reward. |
 
 #### Constants
 
-| Constant | Value |
-| :--- | :--- |
-| `DECIDING_PERIOD` | `fill-in` |
-| `GRACE_PERIOD` | `fill-in` |
-| `APPROVAL_QUORUM` | `fill-in` |
+| Constant             | Value     |
+| -------------------- | --------- |
+| `DECIDING_PERIOD`    | `fill-in` |
+| `GRACE_PERIOD`       | `fill-in` |
+| `APPROVAL_QUORUM`    | `fill-in` |
 | `APPROVAL_THRESHOLD` | `fill-in` |
-| `SLASHING_QUORUM` | `fill-in` |
+| `SLASHING_QUORUM`    | `fill-in` |
 | `SLASHING_THRESHOLD` | `fill-in` |
-| `PROPOSAL_STAKE` | `fill-in` |
-| `CONSTITUTIONALITY` | `fill-in` |
+| `PROPOSAL_STAKE`     | `fill-in` |
+| `CONSTITUTIONALITY`  | `fill-in` |
 
 #### Creation Conditions
 
@@ -888,10 +820,10 @@ The councilor reward is set to `new_councilor_reward`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name    | Description            |
+| ------- | ---------------------- |
 | `title` | Title of the blog post |
-| `text` | Text of the blog post |
+| `text`  | Text of the blog post  |
 
 #### Creation Conditions
 
@@ -909,11 +841,11 @@ A blog post is created.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name      | Description                     |
+| --------- | ------------------------------- |
 | `post_id` | Id of the blog edited blog post |
-| `title` | New title of the blog post |
-| `text` | New text of the blog post |
+| `title`   | New title of the blog post      |
+| `text`    | New text of the blog post       |
 
 #### Creation Conditions
 
@@ -931,8 +863,8 @@ Blog post with id `post_id` with new `title` and `text`
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name      | Description                     |
+| --------- | ------------------------------- |
 | `post_id` | Id of the blog edited blog post |
 
 #### Creation Conditions
@@ -951,8 +883,8 @@ Locks the post with `post_id` for modification
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name      | Description                     |
+| --------- | ------------------------------- |
 | `post_id` | Id of the blog edited blog post |
 
 #### Creation Conditions
@@ -971,16 +903,16 @@ Unlocks the post with `post_id` allowing for modification
 
 The following constants are hard coded into the system, they can only be updated with a runtime upgrade.
 
-| Name | Description | Value |
-| :--- | :--- | :---: |
-| `MAX_RUNTIME_UPGRADE_BYTES` | Maximum allowed number of bytes in a runtime upgrade Wasm blob. | `fill-in` |
-| `REJECTION_FEE` | Up to number of tokens slashed if proposal rejected, but not with slashing. | `fill-in` |
-| `DISCUSSION_LINGERING_DURATION` | Number of blocks after proposal inactivation a proposal discussion is closed. | `fill-in` |
-| `MAX_POSTS_PER_THREAD` | Max posts per thread. | `fill-in` |
-| `MAX_ACTIVE_PROPOSALS` | Max active proposals allowed at any given time. | `fill-in` |
-| `PROPOSAL_LOCK_ID` | The lock id used for proposal staking locks. | `fill-in` |
-| `MIN_VALIDATOR_COUNT` | The minimum number of validators accepted by validator staking system. | `fill-in` |
-| `MAX_WHITELIST_SIZE` | The maximum number of whitelisted participants in a closed  propsoal discussion. | `fill-in` |
+| Name                            | Description                                                                      |   Value   |
+| ------------------------------- | -------------------------------------------------------------------------------- | :-------: |
+| `MAX_RUNTIME_UPGRADE_BYTES`     | Maximum allowed number of bytes in a runtime upgrade Wasm blob.                  | `fill-in` |
+| `REJECTION_FEE`                 | Up to number of tokens slashed if proposal rejected, but not with slashing.      | `fill-in` |
+| `DISCUSSION_LINGERING_DURATION` | Number of blocks after proposal inactivation a proposal discussion is closed.    | `fill-in` |
+| `MAX_POSTS_PER_THREAD`          | Max posts per thread.                                                            | `fill-in` |
+| `MAX_ACTIVE_PROPOSALS`          | Max active proposals allowed at any given time.                                  | `fill-in` |
+| `PROPOSAL_LOCK_ID`              | The lock id used for proposal staking locks.                                     | `fill-in` |
+| `MIN_VALIDATOR_COUNT`           | The minimum number of validators accepted by validator staking system.           | `fill-in` |
+| `MAX_WHITELIST_SIZE`            | The maximum number of whitelisted participants in a closed  propsoal discussion. | `fill-in` |
 
 ## Extrinsics
 
@@ -988,14 +920,14 @@ The following constants are hard coded into the system, they can only be updated
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `proposer` | Member identifier of proposer. |
-| `title` | Title for proposal. |
-| `rationale` | Rationale for proposal. |
-| `trigger` | Optional trigger block for executing proposal. |
-| `account` | Optional staking account for proposal. |
-| `type` | The of proposal and all associated type specific parameters. |
+| Name        | Description                                                  |
+| ----------- | ------------------------------------------------------------ |
+| `proposer`  | Member identifier of proposer.                               |
+| `title`     | Title for proposal.                                          |
+| `rationale` | Rationale for proposal.                                      |
+| `trigger`   | Optional trigger block for executing proposal.               |
+| `account`   | Optional staking account for proposal.                       |
+| `type`      | The of proposal and all associated type specific parameters. |
 
 #### Conditions
 
@@ -1013,11 +945,11 @@ A new proposal , of type `type` , is created in the deciding period stage, and a
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `proposal` | Identifier for proposal. |
-| `vote_type` | The type of vote. |
-| `rationale` | The rationale for the vote. |
+| Name        | Description                    |
+| ----------- | ------------------------------ |
+| `proposal`  | Identifier for proposal.       |
+| `vote_type` | The type of vote.              |
+| `rationale` | The rationale for the vote.    |
 | `councilor` | Identifier for council member. |
 
 #### Conditions
@@ -1034,11 +966,11 @@ Record vote of `councilor`, and follow steps in **Deciding** stage for processin
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `proposal` | Identifier for proposal. |
-| `text` | Post text. |
-| `author` | Either identifier of council member, or of a member. |
+| Name       | Description                                          |
+| ---------- | ---------------------------------------------------- |
+| `proposal` | Identifier for proposal.                             |
+| `text`     | Post text.                                           |
+| `author`   | Either identifier of council member, or of a member. |
 
 #### Conditions
 
@@ -1055,11 +987,11 @@ Post is added to thread.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name       | Description              |
+| ---------- | ------------------------ |
 | `proposal` | Identifier for proposal. |
-| `post` | Identifier for post. |
-| `text` | New post text. |
+| `post`     | Identifier for post.     |
+| `text`     | New post text.           |
 
 #### Conditions
 
@@ -1077,11 +1009,11 @@ Update text of post.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
-| `proposer` | Identifier for proposal. |
+| Name        | Description                             |
+| ----------- | --------------------------------------- |
+| `proposer`  | Identifier for proposal.                |
 | `member_id` | Identifier of member initiating action. |
-| `mode` | New discussion mode. |
+| `mode`      | New discussion mode.                    |
 
 #### Conditions
 
@@ -1098,10 +1030,10 @@ Update thread discussion mode to `mode`.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name    | Description            |
+| ------- | ---------------------- |
 | `title` | Title of the blog post |
-| `text` | Text of the blog post |
+| `text`  | Text of the blog post  |
 
 #### Creation Conditions
 
@@ -1119,8 +1051,8 @@ A blog post is created.
 
 **Parameters**
 
-| Name | Description |
-| :--- | :--- |
+| Name          | Description              |
+| ------------- | ------------------------ |
 | `proposal_id` | Identifier for proposal. |
 
 #### Creation Conditions
@@ -1134,4 +1066,3 @@ None.
 #### Effect
 
 * Proposal corresponding to `proposal_id` is automatically discarded.
-
