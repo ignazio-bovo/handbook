@@ -81,7 +81,7 @@ An application has the following information
 * **Role account:** A required account that is used to authenticate as the worker if selected, in other parts of the platform. Need not be unique across workers, but in practice probably will be.
 * **Staking account:** The account holding the stake of the application.
 * **Member:** Identifier of member from which application originates.
-* **Description:** [Application description metadata](../key-concepts/encodings.md#working-group-application-description).
+* **Description:** [Application metadata](/key-concepts/encodings.md#working-group-application-metadata).
 
 #### Opening
 
@@ -89,7 +89,7 @@ An opening has the following information associated
 
 * **Id:** A unique immutable non-negative integer identifying an individual opening, is automatically assigned when an opening is created.
 * **Type:** Whether the opening is for the lead or for a non-lead worker.
-* **Description:** [Opening description metadata](../key-concepts/encodings.md#working-group-opening-description).
+* **Description:** [Opening metadata](/key-concepts/encodings.md#working-group-opening-metadata).
 * **Staking policy:**
   * **Balance:** The required non-zero balance required.
   * **Leaving unstaking period:** The number of blocks required from a worker initiating leaving the group until their staked funds are unlocked.
@@ -97,7 +97,14 @@ An opening has the following information associated
 
 ### Status
 
-A working group has an associated _status_ that is updatable by the lead. The status is text signal, denoted by `status`, which follows some yet to be standardized encoding.
+A working group has an associated _status_ that is updatable by the lead. The status is modified through text signals (see: [Set Status](#set-status)), which follow a standardized [WorkingGroupAction](/key-concepts/encodings.md#working-group-action) encoding.
+
+Sending an encoded [WorkingGroupAction](/key-concepts/encodings.md#working-group-action) message allows signaling one of the following actions:
+- Setting or updating the basic [group metadata](/key-concepts/encodings.md#workinggroupmetadata) (for example: `statusMessage`, `description`)
+- Creating an _Upcoming Opening_ (for the purpose of signaling that an actual [opening](#opening) may be created in the future)
+- Removing existing _Upcoming opening_.
+
+Those signals are processed by _Query nodes_, which update the status in the database in case the signalled action is valid.
 
 ## Constants
 
@@ -117,11 +124,11 @@ Hard-coded values are defined _for each working group_, and they can only be alt
 
 **Parameters**
 
-| Name               | Description                                                                                              |
-| ------------------ | -------------------------------------------------------------------------------------------------------- |
-| `description`      | Endoded [opening description](../key-concepts/encodings.md#working-groups-opening-description) metadata. |
-| `staking_policy`   | Staking policy of new opening.                                                                           |
-| `reward_per_block` | Initial per reward block.                                                                                |
+| Name | Description |
+| :--- | :--- |
+| `description` | Encoded [opening metadata](/key-concepts/encodings.md#working-groups-opening-metadata). |
+| `staking_policy` | Staking policy of new opening. |
+| `reward_per_block` | Initial per reward block. |
 
 #### Conditions
 
@@ -138,14 +145,14 @@ A new opening is added with the given information and for hiring a worker, not l
 
 **Parameters**
 
-| Name              | Description                                                                                                     |
-| ----------------- | --------------------------------------------------------------------------------------------------------------- |
-| `member_id`       | Member identifier.                                                                                              |
-| `opening_id`      | Identifier of opening being applied to.                                                                         |
-| `role_account`    | Role account of future worker.                                                                                  |
-| `staking_account` | Account holding stake.                                                                                          |
-| `staking_balance` | Balance to stake.                                                                                               |
-| `description`     | Encoded [application description](../key-concepts/encodings.md#working-group-application-description) metadata. |
+| Name | Description |
+| :--- | :--- |
+| `member_id` | Member identifier. |
+| `opening_id` | Identifier of opening being applied to. |
+| `role_account` | Role account of future worker. |
+| `staking_account` | Account holding stake. |
+| `staking_balance` | Balance to stake. |
+| `description` | Encoded [application metadata](/key-concepts/encodings.md#working-group-application-metadata). |
 
 #### Conditions
 
@@ -411,9 +418,9 @@ Account balance is increased by `amount`, and `budget` is reduced correspondingl
 
 **Parameters**
 
-| Name         | Description                                                                                            |
-| ------------ | ------------------------------------------------------------------------------------------------------ |
-| `new_status` | Encoded [working group status](../key-concepts/encodings.md#working-group-status) new status metadata. |
+| Name | Description |
+| :--- | :--- |
+| `new_status` | Encoded [working group action metadata](/key-concepts/encodings.md#working-group-action). |
 
 #### Conditions
 
@@ -422,4 +429,4 @@ Account balance is increased by `amount`, and `budget` is reduced correspondingl
 
 #### Effect
 
-`status` is set to `new_status`.
+Assuming the encoded action metadata is valid – the signalled action should be executed by _Query nodes_ (see: [Status](#status))
